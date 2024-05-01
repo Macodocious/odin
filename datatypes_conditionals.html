@@ -55,11 +55,33 @@
         </div>
     </div>
 
+    <!---->
+
     <p id="display" style="size:3rem; margin:auto;"></p>
+
+    <!---->
+
     <div class="quotes">
         <p id="single" style="size:3rem; margin:auto;"></p>
         <p id="double" style="size:3rem; margin:auto;"></p>
         <p id="backtick" style="size:3rem; margin:auto;"></p>
+    </div>
+
+    <!---->
+
+    <div class="quotes">
+        <button>Press me</button>
+        <div id="greeting"></div>
+    </div>
+
+    <!---->
+
+    <div class="quotes">
+        <p id="concate" style="size:3rem; margin:auto;"></p>
+    </div>
+
+    <div class="quotes">
+        <p id="song" style="size:3rem; margin:auto;"></p>
     </div>
 
     <script>
@@ -67,13 +89,44 @@
         const string = "To dare is to do.";
         document.getElementById("display").innerHTML = string;
 
+        //
+
         const single = 'Single';  // works
         const double = "Double";  // works
-        const backtick = `Backtick`; // also works
+        const backtick = `Backtick`; // also works (~ key but no shift)
 
         document.getElementById("single").innerHTML = single;
         document.getElementById("double").innerHTML = double;
         document.getElementById("backtick").innerHTML = backtick;
+
+        //
+
+        const button = document.querySelector("button"); // querySelector is more universal than getElementByID
+
+        function greet() {
+            const team = prompt("What is your favourite team?"); // prompt uses popup dialog box
+            const greeting = document.querySelector("#greeting");
+            greeting.textContent = "That is my favourite team too!"; // .textContent allows you to get or set the text content of "#greeting"
+        }
+
+        button.addEventListener("click", greet); // addEventListener allows you to specify a function to be executed when a particular event occurs like "click"
+
+        //
+
+        const hello = "Hello";
+        const me = "Brian";
+
+        document.querySelector("#concate").innerHTML = (hello + ", " + me);
+
+        //
+
+        const song = "Sweet Caroline";
+        const score = 9;
+        const highestScore = 10;
+        const output = 'I like this song ' + song + '. I gave it a score of ' + (score / highestScore) * 100 + '%.'; // '+ variable +'
+     // const output = `I like this song ${song}. I gave it a score of ${(score / highestScore) * 100}%.` // backticks solution
+
+        document.querySelector("#song").innerHTML = output;
 
     </script>
 
