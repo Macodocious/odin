@@ -4,19 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datatypes & Conditionals</title>
+
+    <style>
+
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-decoration: none;
+        }
+
+        .header {
+            margin: 3rem;
+            display: flex;
+        }
+
+        .logo {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;;
+        }
+
+        .nav-item {
+            a {
+                font-weight: 700;
+            }
+        }
+
+        .quotes {
+            margin-top: 10rem;
+        }
+
+    </style>
 </head>
 <body>
     
+    <div class="header">
+        <img class="logo" src="https://avatars.githubusercontent.com/u/4441966?s=200&v=4">
+        <div class="nav">
+            <div class="nav-item">
+                <a href="/index.html">Home</a>
+            </div>
+            <div class="nav-item">
+                <a href="/datatypes_conditionals.html">Data Types & Conditionals</a>
+            </div>
+        </div>
+    </div>
+
     <p id="display" style="size:3rem; margin:auto;"></p>
+    <div class="quotes">
+        <p id="single" style="size:3rem; margin:auto;"></p>
+        <p id="double" style="size:3rem; margin:auto;"></p>
+        <p id="backtick" style="size:3rem; margin:auto;"></p>
+    </div>
 
     <script>
 
-        let x = 9 + 10;
-        document.getElementById("display").innerHTML = x;
+        const string = "To dare is to do.";
+        document.getElementById("display").innerHTML = string;
+
+        const single = 'Single';  // works
+        const double = "Double";  // works
+        const backtick = `Backtick`; // also works
+
+        document.getElementById("single").innerHTML = single;
+        document.getElementById("double").innerHTML = double;
+        document.getElementById("backtick").innerHTML = backtick;
 
     </script>
-
-    <!-- test -->
 
 </body>
 </html>
