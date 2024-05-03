@@ -1,0 +1,106 @@
+/* General CSS */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #141414;
+    margin-block: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: #141414;
+    transition-duration: 300ms;
+}
+a:hover {
+    color: #14141464;
+    transition-duration: 300ms;
+}
+.active {
+    color: #14141464;
+}
+.active:hover {
+    color: #141414;
+}
+.body {
+    /* width: 100vw; */
+    margin: 0;
+}
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    background-color: #f9f9f9;
+    position: fixed;
+    width: 15vw;
+    height: -webkit-fill-available;
+    gap: 4rem;
+}
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.block:last-child {
+    margin-top: auto;
+}
+.last-nav {
+    margin-top: auto;
+}
+.label {
+    color: #14141464;
+}
+.main {
+    margin-left: 15vw;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.indent {
+    margin-left: 2rem;
+}
+
+.last-child {
+    margin-top: auto;
+}
+
+.notice {
+    background-color: #f0f0f0;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4rem;
+    background-color: #d3d3d3;
+}
+
+/* Page CSS */
+
+.works {
+    /* display: grid; */
+    gap: 1rem;
+    /* grid: auto-flow dense / 1fr 1fr; */
+    display: flex;
+    flex-direction: column;
+}
+
+.work {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 2rem;
+    padding: 2rem;
+
+    .block:last-child {
+        margin-top: auto;
+    }
+}

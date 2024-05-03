@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Odin Project: Foundations</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body class="body">
+    <div id="navigationContainer"></div>
+    <div class="main">
+        <h2>Variables & Operators</h2>
+        <div class="works">
+            <div class="work">
+                <p class="label">1. Add 2 numbers together!</p>
+                <div class="block">
+                    <p>let a1 = 23 + 97;</p>
+                    <p>document.querySelector("#a1").innerHTML = a1;</p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p id="a1"></p>
+                </div>
+            </div>
+            <div class="work">
+                <p class="label">2. Add a sequence of 6 different numbers together.</p>
+                <div class="block">
+                    <p>let a2 = 23 + 97 + 45 + 78 + 12 + 37;</p>
+                    <p>document.querySelector("#a2").innerHTML = a2;</p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p id="a2"></p>
+                </div>
+            </div>
+            <div class="work">
+                <p class="label">3. Print the value of the following expression: <span class="notice">(4 + 6 + 9) / 77</span></p>
+                <div class="block">
+                    <p>let a3 = (4 + 6 + 9) / 77;</p>
+                    <p>document.querySelector("#a3").innerHTML = a3;</p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p id="a3"></p>
+                </div>
+            </div>
+            <div class="work">
+                <div class="block">
+                    <p class="label">4. Let’s use variables!</p>
+                    <p class="label indent">Type this statement at the top of the script tag: <span class="notice">let a = 10</span></p>
+                    <p class="label indent">Should print <span class="notice">10</span></p>
+                    <p class="label indent">Try the following: <span class="notice">9 * a</span></p>
+                    <p class="label indent">and this: <span class="notice">let b = 7 * a</span> (returns <span class="notice">undefined</span> *)</p>
+                </div>
+                <div class="block">
+                    <p>let a4 = 10;</p>
+                    <p>let a4b = 9 * a4a;</p>
+                    <p>let a4c = 7 * a4a;</p>
+                    <p>document.querySelector("#a4a").innerHTML = a4a;</p>
+                    <p>document.querySelector("#a4b").innerHTML = a4b;</p>
+                    <p>document.querySelector("#a4c").innerHTML = a4c;</p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p id="a4a"></p>
+                    <p id="a4b"></p>
+                    <p id="a4c"></p>
+                </div>
+            </div>
+            <div class="work">
+                <div class="block">
+                    <p class="label">5. You should be getting the hang of this by now… try this sequence:</p>
+                    <p class="label indent">Declare a constant variable <span class="notice">MAX</span> with the value <span class="notice">57</span></p>
+                    <p class="label indent">Set another variable <span class="notice">actual</span> to <span class="notice">MAX - 13</span></p>
+                    <p class="label indent">Set another variable <span class="notice">percentage</span> to <span class="notice">actual / MAX</span></p>
+                    <p class="label indent">If you type <span class="notice">percentage</span> in the console and press <span class="notice">Enter</span> you should see a value like <span class="notice">0.7719</span></p>
+                </div>
+                <div class="block">
+                    <p>const MAX = 57;</p>
+                    <p>let actual = MAX - 13;</p>
+                    <p>let percentage = actual / MAX;</p>
+                    <p>document.querySelector("#a5").innerHTML = percentage;</p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p id="a5"></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        let a1 = 23 + 97;
+        document.querySelector("#a1").innerHTML = a1;
+
+        //
+
+        let a2 = 23 + 97 + 45 + 78 + 12 + 37;
+        document.querySelector("#a2").innerHTML = a2;
+
+        //
+
+        let a3 = (4 + 6 + 9) / 77;
+        document.querySelector("#a3").innerHTML = a3;
+
+        //
+
+        let a4a = 10;
+        let a4b = 9 * a4a;
+        let a4c = 7 * a4a;
+        document.querySelector("#a4a").innerHTML = a4a;
+        document.querySelector("#a4b").innerHTML = a4b;
+        document.querySelector("#a4c").innerHTML = a4c;
+
+        //
+
+        const MAX = 57;
+        let actual = MAX - 13;
+        let percentage = actual / MAX;
+        document.querySelector("#a5").innerHTML = percentage;
+    </script>
+    <script src="load.js"></script>
+</body>
+</html>

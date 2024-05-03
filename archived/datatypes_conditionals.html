@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datatypes & Conditionals</title>
+
+    <style>
+
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-decoration: none;
+        }
+
+        .header {
+            margin: 3rem;
+            display: flex;
+        }
+
+        .logo {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;;
+        }
+
+        .nav-item {
+            a {
+                font-weight: 700;
+            }
+        }
+
+        .quotes {
+            margin-top: 4rem;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="header">
+        <img class="logo" src="https://avatars.githubusercontent.com/u/4441966?s=200&v=4">
+        <div class="nav">
+            <div class="nav-item">
+                <a href="/index.html">Home</a>
+            </div>
+            <div class="nav-item">
+                <a href="/datatypes_conditionals.html">Data Types & Conditionals</a>
+            </div>
+        </div>
+    </div>
+
+    <!---->
+
+    <p id="display" style="size:3rem; margin:auto;"></p>
+
+    <!---->
+
+    <div class="quotes">
+        <p id="single" style="size:3rem; margin:auto;"></p>
+        <p id="double" style="size:3rem; margin:auto;"></p>
+        <p id="backtick" style="size:3rem; margin:auto;"></p>
+    </div>
+
+    <!---->
+
+    <div class="quotes">
+        <button>Press me</button>
+        <div id="greeting"></div>
+    </div>
+
+    <!---->
+
+    <div class="quotes">
+        <p id="concate" style="size:3rem; margin:auto;"></p>
+    </div>
+
+    <!---->
+
+    <div class="quotes">
+        <p id="song" style="size:3rem; margin:auto;"></p>
+    </div>
+
+    <!---->
+
+    <div class="quotes">
+        <p id="time" style="size:3rem; margin:auto;"></p>
+    </div>
+
+    <script>
+
+        const string = "To dare is to do.";
+        document.getElementById("display").innerHTML = string;
+
+        //
+
+        const single = 'Single';  // works
+        const double = "Double";  // works
+        const backtick = `Backtick`; // also works (~ key but no shift)
+
+        document.getElementById("single").innerHTML = single;
+        document.getElementById("double").innerHTML = double;
+        document.getElementById("backtick").innerHTML = backtick;
+
+        //
+
+        const button = document.querySelector("button"); // querySelector is more universal than getElementByID
+
+        function greet() {
+            const team = prompt("What is your favourite team?"); // prompt uses popup dialog box
+            const greeting = document.querySelector("#greeting");
+            greeting.textContent = "That is my favourite team too!"; // .textContent allows you to get or set the text content of "#greeting"
+        }
+
+        button.addEventListener("click", greet); // addEventListener allows you to specify a function to be executed when a particular event occurs like "click"
+
+        //
+
+        const hello = "Hello";
+        const me = "Brian";
+
+        document.querySelector("#concate").innerHTML = (hello + ", " + me);
+
+        //
+
+        const song = "Sweet Caroline";
+        const score = 9;
+        const highestScore = 10;
+        const output = 'I like this song ' + song + '. I gave it a score of ' + (score / highestScore) * 100 + '%.'; // '+ variable +'
+     // const output = `I like this song ${song}. I gave it a score of ${(score / highestScore) * 100}%.` // backticks solution
+
+        document.querySelector("#song").innerHTML = output;
+
+        //
+
+        const hour = new Date().getHours();
+        let time;
+
+        if (hour < 18) {
+            time = "Good Day";
+        } else {
+            time = "What time is it?";
+        }
+
+        document.querySelector("#time").innerHTML = time;
+
+        //
+
+    </script>
+
+</body>
+</html>
