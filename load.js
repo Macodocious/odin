@@ -128,31 +128,33 @@ document.addEventListener("DOMContentLoaded", function() {
         let saveButton = document.createElement("button");
         saveButton.textContent = "Save";
         saveButton.addEventListener("click", function() {
-            // Checks to see if any textarea is empty
-            let allTextAreasFilled = true;
+            // Checks to see if any textarea has an characters in it
             let allTextAreas = inputContainer.querySelectorAll(".code");
-                for (let i = 0; i < allTextAreas.length; i++) {
-                    if (allTextAreas[i].value.trim().length === 0) {
-                        allTextAreasFilled = false;
-                        break;
-                    }
+            let anyTextAreaEmpty = false;
+            allTextAreas.forEach(function(textarea) {
+                if (textarea.value.trim().length < 1) {
+                    anyTextAreaEmpty = true;
                 }
-            /*
-            // Prevents saving if any textarea is empty
-            if (!allTextAreasFilled) {
-                alert("Please fill in all areas before saving.");
-                return;
+            });
+            if (!anyTextAreaEmpty) {
+                // Hide empty textareas in cloned input component
+                clonedInput.querySelectorAll(".code").forEach(function(textarea) {
+                    if (textarea.value.trim().length < 1) {
+                        textarea.style.display = "none";
+                    }
+                });
+            } else {
+                // alert("Please fill in all areas before saving.");
             }
-            */
-            // Clone the input component and insert it above the current one
-            let clonedInput = inputContainer.cloneNode(true);
-            findInputContainer.insertBefore(clonedInput, inputContainer);
-            // Reset the current input component
-            resetInputComponent(inputContainer);
-            // Remove the save button from the cloned input component
-            clonedInput.removeChild(clonedInput.querySelector("button"));
-            // Adjust height of CodeMirror elements in the cloned input component
-            adjustCodeMirrorHeight(clonedInput);
+                // Clone the input component and insert it above the current one
+                let clonedInput = inputContainer.cloneNode(true);
+                findInputContainer.insertBefore(clonedInput, inputContainer);
+                // Reset the current input component
+                resetInputComponent(inputContainer);
+                // Remove the save button from the cloned input component
+                clonedInput.removeChild(clonedInput.querySelector("button"));
+                // Adjust height of CodeMirror elements in the cloned input component
+                adjustCodeMirrorHeight(clonedInput);
         });
         inputContainer.appendChild(saveButton);
 
