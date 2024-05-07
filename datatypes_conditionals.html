@@ -4,17 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Odin Project: Foundations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body class="body">
     <div id="navigationContainer"></div>
     <div class="main">
         <h2>Data Types & Conditionals</h2>
+        <div class="works">
+            <div class="work">
+                <div class="block">
+                    <p class="label">Comparison: What will be the result for these expressions?</p>
+                    <p class="label indent">5 > 4</p>
+                    <p class="label indent">"apple" > "pineapple"</p>
+                    <p class="label indent">"2" > "12"</p>
+                    <p class="label indent">undefined == null</p>
+                    <p class="label indent">undefined === null</p>
+                    <p class="label indent">null == "\n0\n"</p>
+                    <p class="label indent">null === +"\n0\n"</p>
+                </div>      
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p>True</p>
+                    <p>False</p>
+                    <p><span style="text-decoration: line-through">False</span> <span class="notice">True, because you are comparing two strings so it is lexicographical.</span></p>
+                    <p>True</p>
+                    <p>False</p>
+                    <p><span style="text-decoration: line-through">True</span> <span class="notice">False, null only equals undefined and vice-versa.</span></p>
+                    <p>False</p>
+                </div>
+            </div>
+            <div class="work">
+                <div class="block">
+                    <p class="label">Logical Operators: What's the result of OR?</p>
+                    <p class="label indent">What is the code below going to output?</p>
+                    <p class="indent"><span class="notice">alert( null || 2 || undefined );</span></p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p>2 <span class="notice">OR looks for the first truthy value</span></p>
+                </div>
+            </div>
+            <div class="work">
+                <div class="block">
+                    <p class="label">Logical Operators: What's the result of OR'ed alerts?</p>
+                    <p class="label indent">What will the code below output?</p>
+                    <p class="indent"><span class="notice">alert( alert(1) || 2 || alert(3) );</span></p>
+                </div>
+                <div class="block">
+                    <p class="label">Result</p>
+                    <p>1 then 2 <span class="notice">alert() does not return a value so it returns undefined which looks for the next truthy value</span></p>
+                </div>
+            </div>
+            <div id="input-container"></div>
+        </div>
     </div>
 
     <script>
 
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js"></script>
     <script src="load.js"></script>
-</body>
 </html>

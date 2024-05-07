@@ -1,3 +1,4 @@
+// For current page active-state
 // "DOMContentLoaded" is an event that indicates the page has been loaded and is ready to be manipulated.
 // "addEventListener" is an event listener attached to the "document" object waiting/listening for "DOMContentLoaded" event.
 document.addEventListener("DOMContentLoaded", function() {
@@ -15,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Creates a "nav" for each page
 // Function to create the component
@@ -50,10 +53,17 @@ function createNavigationComponent() {
         createNavLink("Calculator")
     ]);
 
+    // Create fourth block
+    let block4 = createBlock("Brian Mac", [
+        createNavLink("LinkedIn", "https://www.linkedin.com/in/brianmac97/"),
+        createNavLink("GitHub", "https://github.com/Macodocious/")
+    ]);
+
     // Append blocks to container
     navContainer.appendChild(block1);  // In this case, appendChild is adding block 2 after block 1, and block 3 after block 2, making block 3 the last-child 'added'.
     navContainer.appendChild(block2);  // It does not absolutely make it the "last-child" like in :last-child.
     navContainer.appendChild(block3);
+    navContainer.appendChild(block4);
 
     return navContainer; // The "return" statement is used to specify the value a function should return when it is called. Kind of like the result so that you can use it elsewhere.    // Example, a bakery is the function, giving the order to the baker is calling the function,
 }                        // In this case, When "createNavigationComponent()" is called, it will create a component represented by "navContainer".                                           baker making the cake is the function performing, and the finished cake being handed to you is the "return" statement.
@@ -64,7 +74,7 @@ function createBlock(labelText, links) {
     block.classList.add("block");
     
     let label = document.createElement("p");
-    label.classList.add("label");
+    // label.classList.add("label");
     label.textContent = labelText;
     block.appendChild(label); // appendChild adds an existing node (element, text node, etc. - in this case ".label") to the last child of a specified parent node.
 
@@ -89,3 +99,126 @@ function createNavLink(text, href) {
 // Get container element and insert the navigation component
 let container = document.getElementById("navigationContainer");
 container.appendChild(createNavigationComponent());
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize CodeMirror
+    let editors = [];
+    let inputComponents = [];
+
+    // Create an "input component" for each page
+    // Function to create the component
+    function createInputComponent() {
+        // Create the container
+        let inputContainer = document.createElement("div");
+        inputContainer.classList.add("input-container");
+
+        // Create inputs
+        let input1 = createInput('Question');
+        let input2 = createInput('Code');
+        let input3 = createInput('Result');
+
+        // Append inputs to container;
+        inputContainer.appendChild(input1);
+        inputContainer.appendChild(input2);
+        inputContainer.appendChild(input3);
+
+        // Create a button to save input data
+        let saveButton = document.createElement("button");
+        saveButton.textContent = "Save";
+        saveButton.addEventListener("click", function() {
+            // Checks to see if any textarea is empty
+            let allTextAreasFilled = true;
+            let allTextAreas = inputContainer.querySelectorAll(".code");
+                for (let i = 0; i < allTextAreas.length; i++) {
+                    if (allTextAreas[i].value.trim().length === 0) {
+                        allTextAreasFilled = false;
+                        break;
+                    }
+                }
+            /*
+            // Prevents saving if any textarea is empty
+            if (!allTextAreasFilled) {
+                alert("Please fill in all areas before saving.");
+                return;
+            }
+            */
+            // Clone the input component and insert it above the current one
+            let clonedInput = inputContainer.cloneNode(true);
+            findInputContainer.insertBefore(clonedInput, inputContainer);
+            // Reset the current input component
+            resetInputComponent(inputContainer);
+            // Remove the save button from the cloned input component
+            clonedInput.removeChild(clonedInput.querySelector("button"));
+            // Adjust height of CodeMirror elements in the cloned input component
+            adjustCodeMirrorHeight(clonedInput);
+        });
+        inputContainer.appendChild(saveButton);
+
+        // Store the input component
+        inputComponents.push(inputContainer);
+
+        return inputContainer;
+    }
+
+    // Function to create input
+    function createInput(inputType) {
+        let createInputSection = document.createElement("div");
+        createInputSection.classList.add("input-section");
+
+        let codeLabel = document.createElement("p");
+        codeLabel.classList.add("label");
+        switch (inputType) {
+            case 'Question':
+                codeLabel.textContent = "Question";
+                break;
+            case 'Code':
+                codeLabel.textContent = "Code";
+                break;
+            case 'Result':
+                codeLabel.textContent = "Result";
+        }
+
+        let code = document.createElement("textarea");
+        code.classList.add("code");
+
+        createInputSection.appendChild(codeLabel);
+        createInputSection.appendChild(code);
+        // Initialize CodeMirror for the newly created textarea
+        let editor = CodeMirror.fromTextArea(code, {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true,
+            indentUnit: 2,
+            tabSize: 2,
+            autofocus: true
+        });
+
+        editors.push(editor);
+        return createInputSection;
+    }
+
+    
+
+    // Function to reset input component
+    function resetInputComponent(component) {
+        let textAreas = component.querySelectorAll(".code");
+        textAreas.forEach(function(textarea) {
+            textarea.value = "";
+            editors[inputComponents.indexOf(component)].setValue("");
+        });
+    }
+
+    // Get container element and insert the input component
+    let findInputContainer = document.getElementById("input-container");
+    findInputContainer.appendChild(createInputComponent());
+
+    // Function to adjust height of CodeMirror elements
+    function adjustCodeMirrorHeight(component) {
+        let codeMirrors = component.querySelectorAll(".CodeMirror");
+        codeMirrors.forEach(function(codeMirror) {
+            codeMirror.style.height = "fit-content";
+        });
+    }
+});
