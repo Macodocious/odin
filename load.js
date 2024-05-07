@@ -124,6 +124,12 @@ document.addEventListener("DOMContentLoaded", function() {
         inputContainer.appendChild(input2);
         inputContainer.appendChild(input3);
 
+        // Button Wrapper
+        let componentButtons = document.createElement("div");
+        componentButtons.classList.add("component-buttons");
+
+        inputContainer.appendChild(componentButtons);
+
         // Create a button to save input data
         let saveButton = document.createElement("button");
         saveButton.textContent = "Save";
@@ -138,24 +144,22 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Reset the current input component
                 resetInputComponent(inputContainer);
                 // Remove the save button from the cloned input component
-                clonedInput.removeChild(clonedInput.querySelector("button"));
+                clonedInput.removeChild(clonedInput.querySelector(".component-buttons"));
                 // Adjust height of CodeMirror elements in the cloned input component
                 adjustCodeMirrorHeight(clonedInput);
-                // Hide empty CodeMirror instances in cloned component
-                let clonedEditors = Array.from(clonedInput.querySelectorAll(".clone .CodeMirror"));
-                console.log("Clone Editors:", clonedEditors);
-                clonedEditors.forEach(function(cmElement) {
-                    let editor = cmElement.CodeMirror
-                    console.log("Editor", editor);
-                    if (editor && editor.getValue().trim().length === 0) {
-                       editor.getWrapperElement().classList.add("hidden"); 
-                    }    
-                });
-            } else {
-                alert("Please fill in all areas before saving.");
-            }    
+            }  
         });
-        inputContainer.appendChild(saveButton);
+        componentButtons.appendChild(saveButton);
+
+        // Create a button to delete the current component
+        let deleteButton = document.createElement("i");
+        deleteButton.classList.add("ph", "ph-trash");
+        deleteButton.addEventListener("click", function() {
+            // Removes the current input component
+            inputContainer.remove();
+        });
+
+        componentButtons.appendChild(deleteButton);
 
         // Store the input component
         inputComponents.push(inputContainer);
@@ -167,6 +171,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function createInput(inputType) {
         let createInputSection = document.createElement("div");
         createInputSection.classList.add("input-section");
+
+        let labelWrapper = document.createElement("div");
+        labelWrapper.classList.add("label-wrapper");
+
+        let labelIcons = document.createElement("div");
+        labelIcons.classList.add("label-icons");
+
+        let iconEdit = document.createElement("i");
+        iconEdit.classList.add("ph", "ph-note-pencil");
 
         let codeLabel = document.createElement("p");
         codeLabel.classList.add("label");
@@ -181,10 +194,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 codeLabel.textContent = "Result";
         }
 
+        // labelIcons.appendChild(iconEdit); // This is to add iconEdit to the icon-wrapper
+        labelWrapper.appendChild(codeLabel);
+        labelWrapper.appendChild(labelIcons);
+
         let code = document.createElement("textarea");
         code.classList.add("code");
 
-        createInputSection.appendChild(codeLabel);
+        createInputSection.appendChild(labelWrapper);
         createInputSection.appendChild(code);
         // Initialize CodeMirror for the newly created textarea
         let editor = CodeMirror.fromTextArea(code, {
@@ -196,16 +213,28 @@ document.addEventListener("DOMContentLoaded", function() {
             autofocus: true
         });
 
+        // Store the editor
         editors.push(editor);
         return createInputSection;
     }
 
     // Function to reset input component
     function resetInputComponent(component) {
-        let textAreas = component.querySelectorAll(".code");
-        textAreas.forEach(function(textarea) {
+        // Find all "original" input sections within the current input component
+        let originalInputSections = component.querySelectorAll('.input-section:not(.clone)');
+
+        originalInputSections.forEach(function(inputSection) {
+            // Reset value in the textarea within the input section
+            let textarea = inputSection.querySelector(".code");
             textarea.value = "";
-            editors[inputComponents.indexOf(component)].setValue("");
+    
+            // Find the CodeMirror instance associated with the input section
+            let editor = inputSection.querySelector('.CodeMirror').CodeMirror;
+    
+            // If a CodeMirror instance exists, reset its value
+            if (editor) {
+                editor.setValue("");
+            }
         });
     }
 

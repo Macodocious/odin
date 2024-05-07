@@ -5,29 +5,40 @@
     margin-block: 0;
     box-sizing: border-box;
 }
+
 a {
     text-decoration: none;
     color: #14141464;
     transition-duration: 300ms;
     cursor: pointer;
 }
+
+i {
+    cursor: pointer;
+}
+
 a:hover {
     color: #141414;
     transition-duration: 300ms;
 }
+
 .active {
     color: #141414;
 }
+
 .active:hover {
     color: #14141464;
 }
+
 .hidden {
     display: none!important;
 }
+
 .body {
     /* width: 100vw; */
     margin: 0;
 }
+
 .nav {
     display: flex;
     flex-direction: column;
@@ -38,20 +49,25 @@ a:hover {
     height: -webkit-fill-available;
     gap: 4rem;
 }
+
 .block, .input-section {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
+
 .block:last-child {
     margin-top: auto;
 }
+
 .last-nav {
     margin-top: auto;
 }
+
 .label {
     color: #14141464;
 }
+
 .main {
     margin-left: 15vw;
     padding: 2rem;
@@ -59,6 +75,7 @@ a:hover {
     flex-direction: column;
     gap: 2rem;
 }
+
 .indent {
     margin-left: 2rem;
 }
@@ -146,11 +163,62 @@ button {
     width: fit-content;
 }
 
+.plain {
+    background-color: transparent;
+    color: #14141464;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.8rem;
+    display: none;
+}
+
+.clone .plain {
+    display: block;
+}
+
+.label-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-icons {
+    display: none;
+    gap: 0.5rem;
+}
+
+.clone .label-icons {
+    display: flex;
+}
+
+.component-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.ph {
+    color: #14141464;
+    font-size: 1.25rem;
+}
+
+.ph-trash {
+    color: #dc2626;
+}
+
+.input-container .ph {
+    display: none;
+}
+
+.clone .ph {
+    display: block;
+}
+
 .CodeMirror {
     font-family: inherit;
     border-radius: 1rem;
     height: 150px;
     cursor: auto;
+    min-height: 43px;
 }
 
 .CodeMirror-gutters {
