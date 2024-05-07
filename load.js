@@ -102,12 +102,12 @@ container.appendChild(createNavigationComponent());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Create an "input component" for each page
 document.addEventListener("DOMContentLoaded", function() {
     // Initialize CodeMirror
     let editors = [];
     let inputComponents = [];
 
-    // Create an "input component" for each page
     // Function to create the component
     function createInputComponent() {
         // Create the container
