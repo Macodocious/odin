@@ -130,18 +130,10 @@ document.addEventListener("DOMContentLoaded", function() {
         saveButton.addEventListener("click", function() {
             // Check if any CodeMirror instance has more than one word
             let anyEmpty = editors.some(editor => editor.getValue().trim().split(/\s+/).length < 1);
-            if (!anyEmpty) {
-                // Hide empty textareas in cloned input component
-                clonedInput.querySelectorAll(".code").forEach(function(textarea) {
-                    if (textarea.value.trim().length <= 1) {
-                        textarea.style.display = "none";
-                    }
-                });
-            } else {
-                alert("Please fill in all areas before saving.");
-            }
+            if (!anyEmpty) {          
                 // Clone the input component and insert it above the current one
                 let clonedInput = inputContainer.cloneNode(true);
+                clonedInput.classList.add("clone");
                 findInputContainer.insertBefore(clonedInput, inputContainer);
                 // Reset the current input component
                 resetInputComponent(inputContainer);
@@ -149,6 +141,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 clonedInput.removeChild(clonedInput.querySelector("button"));
                 // Adjust height of CodeMirror elements in the cloned input component
                 adjustCodeMirrorHeight(clonedInput);
+                // Hide empty CodeMirror instances in cloned component
+                let clonedEditors = Array.from(clonedInput.querySelectorAll(".clone .CodeMirror"));
+                console.log("Clone Editors:", clonedEditors);
+                clonedEditors.forEach(function(cmElement) {
+                    let editor = cmElement.CodeMirror
+                    console.log("Editor", editor);
+                    if (editor && editor.getValue().trim().length === 0) {
+                       editor.getWrapperElement().classList.add("hidden"); 
+                    }    
+                });
+            } else {
+                alert("Please fill in all areas before saving.");
+            }    
         });
         inputContainer.appendChild(saveButton);
 
@@ -194,8 +199,6 @@ document.addEventListener("DOMContentLoaded", function() {
         editors.push(editor);
         return createInputSection;
     }
-
-    
 
     // Function to reset input component
     function resetInputComponent(component) {

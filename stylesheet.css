@@ -21,6 +21,9 @@ a:hover {
 .active:hover {
     color: #14141464;
 }
+.hidden {
+    display: none!important;
+}
 .body {
     /* width: 100vw; */
     margin: 0;
