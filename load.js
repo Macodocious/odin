@@ -128,23 +128,17 @@ document.addEventListener("DOMContentLoaded", function() {
         let saveButton = document.createElement("button");
         saveButton.textContent = "Save";
         saveButton.addEventListener("click", function() {
-            // Checks to see if any textarea has an characters in it
-            let allTextAreas = inputContainer.querySelectorAll(".code");
-            let anyTextAreaEmpty = false;
-            allTextAreas.forEach(function(textarea) {
-                if (textarea.value.trim().length < 1) {
-                    anyTextAreaEmpty = true;
-                }
-            });
-            if (!anyTextAreaEmpty) {
+            // Check if any CodeMirror instance has more than one word
+            let anyEmpty = editors.some(editor => editor.getValue().trim().split(/\s+/).length < 1);
+            if (!anyEmpty) {
                 // Hide empty textareas in cloned input component
                 clonedInput.querySelectorAll(".code").forEach(function(textarea) {
-                    if (textarea.value.trim().length < 1) {
+                    if (textarea.value.trim().length <= 1) {
                         textarea.style.display = "none";
                     }
                 });
             } else {
-                // alert("Please fill in all areas before saving.");
+                alert("Please fill in all areas before saving.");
             }
                 // Clone the input component and insert it above the current one
                 let clonedInput = inputContainer.cloneNode(true);
