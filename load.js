@@ -100,8 +100,76 @@ function createNavLink(text, href) {
 let container = document.getElementById("navigationContainer");
 container.appendChild(createNavigationComponent());
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Function to create a rich text field
+function createRichTextField(className) {
+    // Create a new div element
+    const div = document.createElement('div');
+    div.contentEditable = true; // Set contentEditable to true to make it rich text
+    div.classList.add("work");
+    div.classList.add(className);
+    
+    // Set placeholder based on class name
+    switch(className) {
+      case 'question':
+        div.placeholder = "Enter question here...";
+        break;
+      case 'code':
+        div.placeholder = "Enter code here...";
+        break;
+      case 'result':
+        div.placeholder = "Enter result here...";
+        break;
+      default:
+        div.placeholder = "Enter text here...";
+    }
+
+    // Add event listener for keydown event
+    div.addEventListener('keydown', function(event) {
+      // Check if the pressed key is the Tab key
+      if (event.key === 'Tab') {
+        // Prevent the default behavior of switching focus
+        event.preventDefault();
+        // Insert a tab character (or spaces) at the current cursor position
+        document.execCommand('insertText', false, '\t'); // Insert a tab character
+        // You can use spaces instead by replacing '\t' with '    ' (four spaces)
+      }
+    });
+
+    // Return the created div
+    return div;
+  }
+
+  // Function to initialize and append three rich text fields to the container
+  function initializeRichTextFields() {
+    // Select the container where rich text fields will be appended
+    const container = document.getElementById('input-container');
+
+    // Array of class names for the rich text fields
+    const classNames = ['question', 'code', 'result'];
+
+    // Loop to create and append three rich text fields with different classes
+    classNames.forEach(className => {
+      // Create a new rich text field with the current class name
+      const richTextField = createRichTextField(className);
+      // Append the rich text field to the container
+      container.appendChild(richTextField);
+    });
+
+    // Add div for buttons
+    let footer = document.createElement("div");
+    footer.classList.add("work", "footer");
+
+    container.appendChild(footer);
+  }
+
+  // Call the function to initialize rich text fields when the page loads
+  window.onload = initializeRichTextFields;
+
+////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved///
+
+/*
 // Create an "input component" for each page
 document.addEventListener("DOMContentLoaded", function() {
     // Initialize CodeMirror
@@ -147,6 +215,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 clonedInput.removeChild(clonedInput.querySelector(".component-buttons"));
                 // Adjust height of CodeMirror elements in the cloned input component
                 adjustCodeMirrorHeight(clonedInput);
+                // Add event listeners to the cloned CodeMirror instances
+                addEventListenersToClonedCodeMirrors(clonedInput);
             }  
         });
         componentButtons.appendChild(saveButton);
@@ -163,6 +233,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Store the input component
         inputComponents.push(inputContainer);
+
+        // Function to add event listeners to CodeMirror instances in cloned input components
+        function addEventListenersToClonedCodeMirrors(clonedInput) {
+            let clonedEditors = clonedInput.querySelectorAll(".CodeMirror");
+            clonedEditors.forEach(function(clonedEditor) {
+                clonedEditor.addEventListener("click", function() {
+                    let editorInstance = clonedEditor.CodeMirror;
+                    editorInstance.setOption("readOnly", false); // Make it editable when clicked
+                });
+                clonedEditor.addEventListener("blur", function() {
+                    let editorInstance = clonedEditor.CodeMirror;
+                    editorInstance.setOption("readOnly", true); // Make it read-only when blurred
+                });
+            });
+        }
 
         return inputContainer;
     }
@@ -181,6 +266,9 @@ document.addEventListener("DOMContentLoaded", function() {
         let iconEdit = document.createElement("i");
         iconEdit.classList.add("ph", "ph-note-pencil");
 
+        let iconDelete = document.createElement("i");
+        iconDelete.classList.add("ph", "ph-trash");
+
         let codeLabel = document.createElement("p");
         codeLabel.classList.add("label");
         switch (inputType) {
@@ -194,7 +282,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 codeLabel.textContent = "Result";
         }
 
-        // labelIcons.appendChild(iconEdit); // This is to add iconEdit to the icon-wrapper
+        labelIcons.appendChild(iconEdit); // This is to add iconEdit to the icon-wrapper
+        labelIcons.appendChild(iconDelete);
         labelWrapper.appendChild(codeLabel);
         labelWrapper.appendChild(labelIcons);
 
@@ -210,7 +299,17 @@ document.addEventListener("DOMContentLoaded", function() {
             lineNumbers: true,
             indentUnit: 2,
             tabSize: 2,
-            autofocus: true
+            autofocus: true,
+            readOnly: false
+        });
+
+        // Add event listener to toggle readOnly option
+        editor.on("focus", function() {
+            editor.setOption("readOnly", false);
+        });
+
+        editor.on("blur", function() {
+            editor.setOption("readOnly", true); // Make it read-only when blurred
         });
 
         // Store the editor
@@ -250,3 +349,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
