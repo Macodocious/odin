@@ -105,6 +105,9 @@ a:hover {
     flex-direction: column;
     background-color: #f9f9f9;
     border-radius: 2rem;
+    .label {
+        margin: 1rem 2rem 0;
+    }
 }
 
 .work {
@@ -124,11 +127,11 @@ a:hover {
 */
 
 .question {
-    /* background-color: #f3f3f3; */
-    color: #14141480;
+    background-color: #f3f3f3;
+    color: #141414;
     border-radius: 2rem 2rem 0 0;
     div {
-        color: #14141480;
+        color: #141414;
     }
 }
 
@@ -138,6 +141,8 @@ a:hover {
 
 .code {
     margin: 1rem 2rem;
+    /* background-color: #f3f3f3; */
+    border-radius: 1rem;
     border: 0.0625rem solid #dcdcdc;
     border-radius: 1rem;
     font-family: monospace;
@@ -148,10 +153,14 @@ a:hover {
 
 .result {
     /* background-color: #f3f3f3; */
+    margin: 1rem 2rem;
+    /* border: 0.0625rem solid #dcdcdc; */
+    border-radius: 1rem;
+    background-color: #f3f3f3;
 }
 
 .footer {
-    background-color: #f3f3f3;
+    /* background-color: #f3f3f3; */
     border-radius: 0 0 2rem 2rem;
 }
 

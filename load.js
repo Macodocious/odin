@@ -109,21 +109,6 @@ function createRichTextField(className) {
     div.contentEditable = true; // Set contentEditable to true to make it rich text
     div.classList.add("work");
     div.classList.add(className);
-    
-    // Set placeholder based on class name
-    switch(className) {
-      case 'question':
-        div.placeholder = "Enter question here...";
-        break;
-      case 'code':
-        div.placeholder = "Enter code here...";
-        break;
-      case 'result':
-        div.placeholder = "Enter result here...";
-        break;
-      default:
-        div.placeholder = "Enter text here...";
-    }
 
     // Add event listener for keydown event
     div.addEventListener('keydown', function(event) {
@@ -149,12 +134,25 @@ function createRichTextField(className) {
     // Array of class names for the rich text fields
     const classNames = ['question', 'code', 'result'];
 
+    // Array of labels for the rich text fields
+    const labels = ['Question', null, 'Result'];
+
     // Loop to create and append three rich text fields with different classes
-    classNames.forEach(className => {
-      // Create a new rich text field with the current class name
-      const richTextField = createRichTextField(className);
-      // Append the rich text field to the container
-      container.appendChild(richTextField);
+    classNames.forEach((className, index) => {
+        if (labels[index] !== null) {
+            // Create a new p element for the label
+            /* const textFieldLabel = document.createElement('p');
+            textFieldLabel.classList.add('label');
+            textFieldLabel.textContent = labels[index];
+
+            // Append the label to the container
+            container.appendChild(textFieldLabel); */
+        }
+        
+        // Create a new rich text field with the current class name
+        const richTextField = createRichTextField(className);
+        // Append the rich text field to the container
+        container.appendChild(richTextField);
     });
 
     // Add div for buttons
