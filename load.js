@@ -103,12 +103,26 @@ container.appendChild(createNavigationComponent());
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to create a rich text field
-function createRichTextField(className) {
+function createRichTextField(className, placeholderText) {
     // Create a new div element
     const div = document.createElement('div');
     div.contentEditable = true; // Set contentEditable to true to make it rich text
     div.classList.add("work");
     div.classList.add(className);
+    
+    // If placeholder text is provided, create and append the placeholder element
+    if (placeholderText) {
+        const placeholderDiv = document.createElement('div');
+        placeholderDiv.classList.add('placeholder');
+        placeholderDiv.textContent = placeholderText;
+        div.appendChild(placeholderDiv);
+
+        // Add click event listener to the placeholder div
+        placeholderDiv.addEventListener('click', function() {
+            // Clear the content of the placeholder div when clicked
+            placeholderDiv.textContent = '';
+        });
+    }
 
     // Add event listener for keydown event
     div.addEventListener('keydown', function(event) {
@@ -124,10 +138,10 @@ function createRichTextField(className) {
 
     // Return the created div
     return div;
-  }
+}
 
-  // Function to initialize and append three rich text fields to the container
-  function initializeRichTextFields() {
+// Function to initialize and append three rich text fields to the container
+function initializeRichTextFields() {
     // Select the container where rich text fields will be appended
     const container = document.getElementById('input-container');
 
@@ -136,6 +150,9 @@ function createRichTextField(className) {
 
     // Array of labels for the rich text fields
     const labels = ['Question', null, 'Result'];
+
+    // Array of placeholder text for the rich text fields
+    const placeholders = ['Enter question here...', 'Enter code here...', 'Enter result here...'];
 
     // Loop to create and append three rich text fields with different classes
     classNames.forEach((className, index) => {
@@ -149,8 +166,8 @@ function createRichTextField(className) {
             container.appendChild(textFieldLabel); */
         }
         
-        // Create a new rich text field with the current class name
-        const richTextField = createRichTextField(className);
+        // Create a new rich text field with the current class name and placeholder text
+        const richTextField = createRichTextField(className, placeholders[index]);
         // Append the rich text field to the container
         container.appendChild(richTextField);
     });
@@ -160,10 +177,10 @@ function createRichTextField(className) {
     footer.classList.add("work", "footer");
 
     container.appendChild(footer);
-  }
+}
 
-  // Call the function to initialize rich text fields when the page loads
-  window.onload = initializeRichTextFields;
+// Call the function to initialize rich text fields when the page loads
+window.onload = initializeRichTextFields;
 
 ////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved////Shelved///
 

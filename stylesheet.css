@@ -192,6 +192,11 @@ button {
     width: fit-content;
 }
 
+.placeholder {
+    font-size: 1rem;
+    min-height: 1.1875rem;
+}
+
 /*
 .CodeMirror {
     font-family: inherit;
