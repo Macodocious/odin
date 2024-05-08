@@ -1,85 +1,15 @@
-/* General CSS */
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #141414;
-    margin-block: 0;
-    box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-    color: #14141464;
-    transition-duration: 300ms;
-    cursor: pointer;
-}
-
-i {
-    cursor: pointer;
-}
-
-a:hover {
-    color: #141414;
-    transition-duration: 300ms;
-}
-
-.active {
-    color: #141414;
-}
-
-.active:hover {
-    color: #14141464;
-}
-
-.hidden {
-    display: none!important;
-}
+ /********************** Page CSS **********************/
 
 .body {
     /* width: 100vw; */
     margin: 0;
 }
 
-.nav {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 2rem;
-    background-color: #f9f9f9;
-    position: fixed;
-    width: 15vw;
-    height: -webkit-fill-available;
-    gap: 4rem;
-}
-
-.block, .input-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.block:last-child {
-    margin-top: auto;
-}
-
-.last-nav {
-    margin-top: auto;
-}
-
-.label {
-    color: #14141464;
-}
-
-.main {
-    margin-left: 15vw;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.notice {
-    background-color: #f0f0f0;
-    border-radius: 0.5rem;
-    padding: 0.25rem 0.5rem;
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #141414;
+    margin-block: 0;
+    box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -95,75 +25,20 @@ a:hover {
     outline: none;
 }
 
-.works {
-    display: flex;
-    flex-direction: column;
+a {
+    text-decoration: none;
+    color: #14141464;
+    transition-duration: 300ms;
+    cursor: pointer;
 }
 
-#input-container {
-    display: flex;
-    flex-direction: column;
-    background-color: #f9f9f9;
-    border-radius: 2rem;
-    padding: 2rem;
-    .label {
-        margin: 0;
-    }
-}
-
-.work {
-    padding: 1rem 2rem;
-    border: 0;
-    border-color: transparent;
-    /* font-family: monospace; */
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background-color: #fff;
-    margin: 1rem 0 2rem;
-    /* border: 0.0625rem solid #dcdcdc; */
-} 
-
-/* 
-.work, .work div {
-    font-family: monospace;
-} 
-*/
-
-.question {
-    /* background-color: #f3f3f3; */
+a:hover {
     color: #141414;
-    border-radius: 1rem;
-    div {
-        color: #141414;
-    }
+    transition-duration: 300ms;
 }
 
-.code, .result {
-    font-size: 1rem;
-}
-
-.code {
-    /* background-color: #f3f3f3; */
-    /* border-radius: 1rem;
-    border: 0.0625rem solid #dcdcdc; */
-    border-radius: 1rem;
-    font-family: monospace;
-    div {
-        font-family: monospace;
-    }
-}
-
-.result {
-    /* background-color: #f3f3f3; */
-    /* margin: 1rem 2rem;
-    border: 0.0625rem solid #dcdcdc; */
-    border-radius: 1rem; 
-}
-
-.footer {
-    /* background-color: #f3f3f3; */
-    border-radius: 0 0 2rem 2rem;
+i {
+    cursor: pointer;
 }
 
 input {
@@ -182,6 +57,18 @@ textarea {
     width: 100%;
 }
 
+.active {
+    color: #141414;
+}
+
+.active:hover {
+    color: #14141464;
+}
+
+.hidden {
+    display: none!important;
+}
+
 button {
     padding: 0.75rem 2.25rem;
     border-radius: 5rem;
@@ -194,45 +81,141 @@ button {
     width: fit-content;
 }
 
-.placeholder {
-    /* font-size: 1rem;
-    min-height: 1.1875rem; */
+.label {
+    color: #14141464;
 }
 
-/*
-.CodeMirror {
-    font-family: inherit;
+.notice {
+    background-color: #f0f0f0;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/********************** Navigation CSS **********************/
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    background-color: #f9f9f9;
+    position: fixed;
+    width: 15vw;
+    height: -webkit-fill-available;
+    gap: 4rem;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.block:last-child {
+    margin-top: auto;
+}
+
+/********************** Main CSS **********************/
+
+.main {
+    margin-left: 15vw;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/********************** Input CSS **********************/
+
+.input-container, #input-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    min-height: 9.5rem;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    .label {
+        margin: 0;
+    }
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: max-content;
+}
+
+.toolbar {
+    display: flex;
+    background-color: #f3f3f3;
+    margin-top: auto;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    svg {
+        cursor: pointer;
+    }
+    i {
+        font-size: 1.2rem;
+    }
+}
+
+.toolbar-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.work {
+    padding: 1rem 2rem;
+    border: 0;
+    border-color: transparent;
+    /* font-family: monospace; */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /*background-color: #f9f9f9; */
+    /* margin: 1rem 0 2rem; */
+    /* border: 0.0625rem solid #dcdcdc; */
+} 
+
+.question {
+    background-color: #f3f3f3;
+    color: #141414;
+    border-radius: 1.5rem 1.5rem 0 0;
+    /* border-bottom: 0.0625rem solid #dcdcdc; */
+    div {
+        color: #141414;
+    }
+}
+
+.code, .result {
+    font-size: 1rem;
+}
+
+.code {
+    /* background-color: #f3f3f3; */
+    /* border-radius: 1rem;
+    border: 0.0625rem solid #dcdcdc; */
     border-radius: 1rem;
-    height: 150px;
-    cursor: auto;
-    min-height: 43px;
+    font-family: monospace;
+    min-height: 9.5rem;
+    div {
+        font-family: monospace;
+    }
 }
 
-.CodeMirror-gutters {
-    background-color: #fff;
-    border-right: none;
-    left: 0px;
+.result {
+    background-color: #f3f3f3;
+    margin: 1rem 2rem;
+    /* border: 0.0625rem solid #dcdcdc; */
+    border-radius: 1rem; 
+    min-height: 9.5rem;
 }
 
-.CodeMirror-scroll {
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
 
-.CodeMirror-sizer {
-    margin-left: 42px!important;
-}
-
-.CodeMirror-gutters {
-    min-width: 42px;
-}
-
-.CodeMirror-lines {
-    min-height: 18px;
-}
-
- .cm-variable, cm-text {
-    margin-left: 1rem;
-}
-/*
