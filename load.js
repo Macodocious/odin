@@ -111,7 +111,7 @@ function createRichTextField(className, placeholderText) {
     div.classList.add(className);
     
     // If placeholder text is provided, create and append the placeholder element
-    if (placeholderText) {
+    /* if (placeholderText) {
         const placeholderDiv = document.createElement('div');
         placeholderDiv.classList.add('placeholder');
         placeholderDiv.textContent = placeholderText;
@@ -122,7 +122,7 @@ function createRichTextField(className, placeholderText) {
             // Clear the content of the placeholder div when clicked
             placeholderDiv.textContent = '';
         });
-    }
+    } */
 
     // Add event listener for keydown event
     div.addEventListener('keydown', function(event) {
@@ -149,32 +149,32 @@ function initializeRichTextFields() {
     const classNames = ['question', 'code', 'result'];
 
     // Array of labels for the rich text fields
-    const labels = ['Question', null, 'Result'];
+    const labels = ['Question', 'Code', 'Result'];
 
     // Array of placeholder text for the rich text fields
-    const placeholders = ['Enter question here...', 'Enter code here...', 'Enter result here...'];
+    // const placeholders = ['Question', 'Code', 'Result'];
 
     // Loop to create and append three rich text fields with different classes
     classNames.forEach((className, index) => {
         if (labels[index] !== null) {
             // Create a new p element for the label
-            /* const textFieldLabel = document.createElement('p');
+            const textFieldLabel = document.createElement('p');
             textFieldLabel.classList.add('label');
             textFieldLabel.textContent = labels[index];
 
             // Append the label to the container
-            container.appendChild(textFieldLabel); */
+            container.appendChild(textFieldLabel);
         }
         
         // Create a new rich text field with the current class name and placeholder text
-        const richTextField = createRichTextField(className, placeholders[index]);
+        const richTextField = createRichTextField(className);
         // Append the rich text field to the container
         container.appendChild(richTextField);
     });
 
     // Add div for buttons
     let footer = document.createElement("div");
-    footer.classList.add("work", "footer");
+    footer.classList.add("footer");
 
     container.appendChild(footer);
 }

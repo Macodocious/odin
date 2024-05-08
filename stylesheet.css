@@ -105,8 +105,9 @@ a:hover {
     flex-direction: column;
     background-color: #f9f9f9;
     border-radius: 2rem;
+    padding: 2rem;
     .label {
-        margin: 1rem 2rem 0;
+        margin: 0;
     }
 }
 
@@ -118,7 +119,10 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-}
+    background-color: #fff;
+    margin: 1rem 0 2rem;
+    /* border: 0.0625rem solid #dcdcdc; */
+} 
 
 /* 
 .work, .work div {
@@ -127,9 +131,9 @@ a:hover {
 */
 
 .question {
-    background-color: #f3f3f3;
+    /* background-color: #f3f3f3; */
     color: #141414;
-    border-radius: 2rem 2rem 0 0;
+    border-radius: 1rem;
     div {
         color: #141414;
     }
@@ -140,10 +144,9 @@ a:hover {
 }
 
 .code {
-    margin: 1rem 2rem;
     /* background-color: #f3f3f3; */
-    border-radius: 1rem;
-    border: 0.0625rem solid #dcdcdc;
+    /* border-radius: 1rem;
+    border: 0.0625rem solid #dcdcdc; */
     border-radius: 1rem;
     font-family: monospace;
     div {
@@ -153,10 +156,9 @@ a:hover {
 
 .result {
     /* background-color: #f3f3f3; */
-    margin: 1rem 2rem;
-    /* border: 0.0625rem solid #dcdcdc; */
-    border-radius: 1rem;
-    background-color: #f3f3f3;
+    /* margin: 1rem 2rem;
+    border: 0.0625rem solid #dcdcdc; */
+    border-radius: 1rem; 
 }
 
 .footer {
@@ -193,8 +195,8 @@ button {
 }
 
 .placeholder {
-    font-size: 1rem;
-    min-height: 1.1875rem;
+    /* font-size: 1rem;
+    min-height: 1.1875rem; */
 }
 
 /*
