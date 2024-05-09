@@ -120,37 +120,114 @@ function createInputComponent() {
             let titleButton = document.createElement("i");
             titleButton.classList.add("bi", "bi-type-h1");
             titleButton.addEventListener("click", function() {
-                let headingTextArea = document.createElement("div");
-                headingTextArea.contentEditable = true;
-                headingTextArea.classList.add("heading");
-                headingTextArea.addEventListener('keydown', function(event) {
-                    if (event.key === 'Tab') {
-                        event.preventDefault();
-                        document.execCommand('insertText', false, '    ');
-                    }
-                });
-                inputs.appendChild(headingTextArea);
+                let headingWrapper = document.createElement("div");
+                headingWrapper.classList.add("heading-wrapper", "edit");
+                    // Label
+                    let headingLabelWrapper = document.createElement("div");
+                    headingLabelWrapper.classList.add("label-wrapper", "edit");
+                        let headingLabel = document.createElement("p");
+                        headingLabel.classList.add("label");
+                        headingLabel.textContent = "Heading";
+                        headingLabelWrapper.appendChild(headingLabel)
+                    headingWrapper.appendChild(headingLabelWrapper);
+                    // Textarea
+                    let headingTextArea = document.createElement("div");
+                    headingTextArea.contentEditable = true;
+                    headingTextArea.classList.add("heading");
+                    headingTextArea.addEventListener('keydown', function(event) {
+                        if (event.key === 'Tab') {
+                            event.preventDefault();
+                            document.execCommand('insertText', false, '    ');
+                        }
+                    });
+                    headingWrapper.appendChild(headingTextArea);
+                    // Delete
+                    let deleteHeading = document.createElement("i");
+                    deleteHeading.classList.add("bi", "bi-x-lg", "delete-heading", "edit");
+                    deleteHeading.addEventListener("click", function() {
+                        headingWrapper.remove();
+                        event.stopPropagation;
+                    });
+                    headingWrapper.appendChild(deleteHeading);
+                inputs.appendChild(headingWrapper);             
             });
             let textButton = document.createElement("i");
             textButton.classList.add("bi", "bi-type");
             textButton.addEventListener("click", function() {
-                // inputs.appendChild(text)
+                let textWrapper = document.createElement("div");
+                textWrapper.classList.add("text-wrapper", "edit");
+                    // Label
+                    let textLabelWrapper = document.createElement("div");
+                    textLabelWrapper.classList.add("label-wrapper", "edit");
+                        let textLabel = document.createElement("p");
+                        textLabel.classList.add("label");
+                        textLabel.textContent = "Text";
+                        textLabelWrapper.appendChild(textLabel)
+                    textWrapper.appendChild(textLabelWrapper);
+                    // Textarea
+                    let textArea = document.createElement("div");
+                    textArea.contentEditable = true;
+                    textArea.classList.add("text");
+                    textArea.addEventListener('keydown', function(event) {
+                        if (event.key === 'Tab') {
+                            event.preventDefault();
+                            document.execCommand('insertText', false, '    ');
+                        }
+                    });
+                    textWrapper.appendChild(textArea);
+                    // Delete
+                    let deleteTextArea = document.createElement("i");
+                    deleteTextArea.classList.add("bi", "bi-x-lg", "delete-text", "edit");
+                    deleteTextArea.addEventListener("click", function() {
+                        textWrapper.remove();
+                        event.stopPropagation;
+                    });
+                    textWrapper.appendChild(deleteTextArea);
+                inputs.appendChild(textWrapper);      
+            });       
+            let codeButton = document.createElement("i");
+            codeButton.classList.add("bi", "bi-code-slash");
+            codeButton.addEventListener("click", function() {
+                let codeWrapper = document.createElement("div");
+                codeWrapper.classList.add("code-wrapper", "edit");
+                    // Label
+                    let codeLabelWrapper = document.createElement("div");
+                    codeLabelWrapper.classList.add("label-wrapper", "edit");
+                        let codeLabel = document.createElement("p");
+                        codeLabel.classList.add("label");
+                        codeLabel.textContent = "Code";
+                        codeLabelWrapper.appendChild(codeLabel)
+                        codeWrapper.appendChild(codeLabelWrapper);
+                    // Textarea
+                    let codeArea = document.createElement("div");
+                    codeArea.contentEditable = true;
+                    codeArea.classList.add("code");
+                    codeArea.addEventListener('keydown', function(event) {
+                        if (event.key === 'Tab') {
+                            event.preventDefault();
+                            document.execCommand('insertText', false, '    ');
+                        }
+                    });
+                    codeWrapper.appendChild(codeArea);
+                    // Delete
+                    let deleteCodeArea = document.createElement("i");
+                    deleteCodeArea.classList.add("bi", "bi-x-lg", "delete-text", "edit");
+                    deleteCodeArea.addEventListener("click", function() {
+                        codeWrapper.remove();
+                        event.stopPropagation;
+                    });
+                    codeWrapper.appendChild(deleteCodeArea);
+                inputs.appendChild(codeWrapper);  
             });
             let tagButton = document.createElement("i");
             tagButton.classList.add("bi", "bi-textarea-t");
             tagButton.addEventListener("click", function() {
                 // <span class="notice"></span>
             });
-            let codeButton = document.createElement("i");
-            codeButton.classList.add("bi", "bi-code-slash");
-            codeButton.addEventListener("click", function() {
-                // inputs.appendChild(code)
-            });
-
             toolbarButtons.appendChild(titleButton);
             toolbarButtons.appendChild(textButton);
-            toolbarButtons.appendChild(tagButton);
             toolbarButtons.appendChild(codeButton);
+            toolbarButtons.appendChild(tagButton);
 
             let saveButton = document.createElement("i");
             saveButton.classList.add("bi", "bi-plus-lg");
