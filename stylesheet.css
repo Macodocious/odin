@@ -180,6 +180,19 @@ button {
     position: relative;
 }
 
+.code-wrapper {
+    border: 0.0625rem solid #d3d3d3;
+    border-radius: 0.75rem;
+    .label-wrapper {
+        border-bottom: 0.0625rem solid #d3d3d3;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.code-wrapper .label-wrapper.edit {
+    border: none;
+}
+
 .heading,
 .text,
 .code {
@@ -210,6 +223,7 @@ button {
 .code-wrapper.edit {
     background-color: #f3f3f3;
     border-radius: 0.75rem;
+    border: none;
 }
 
 .delete-heading,
