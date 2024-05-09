@@ -103,15 +103,34 @@ container.appendChild(createNavigationComponent());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Declare inputs outside of the function to make it accessible globally
+let inputComponent;
 let inputs;
 
+// Function to clone the input container and remove the toolbar, "edit" class, and make it read-only
+function cloneInputComponent() {
+    let clonedInputComponent = inputComponent.cloneNode(true); // Clone the input container
+    clonedInputComponent.removeAttribute('id'); // Remove the id attribute
+    clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.remove()); // Remove the label-wrapper div
+    clonedInputComponent.querySelectorAll('.toolbar').forEach(toolbar => toolbar.remove()); // Remove the toolbar
+    let editElements = clonedInputComponent.querySelectorAll('.edit'); // Find all elements with class "edit"
+    editElements.forEach(element => {
+        element.classList.remove('edit'); // Remove the "edit" class
+    });
+    let contentEditable = clonedInputComponent.querySelectorAll('.heading, .code, .text');
+    contentEditable.forEach(element => {
+        element.contentEditable = false; // Make it read-only
+    });
+    inputs.innerHTML = ''; // Clear the content of the original input container
+    return clonedInputComponent;
+}
+
 function createInputComponent() {
-    let inputComponent = document.createElement("div");
+    inputComponent = document.createElement("div");
     inputComponent.setAttribute("id", "input-container");
     inputComponent.classList.add("input-container");
 
     inputs = document.createElement("div");
-    inputs.classList.add("inputs");
+    inputs.classList.add("inputs", "edit");
 
     let toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
@@ -133,7 +152,7 @@ function createInputComponent() {
                     // Textarea
                     let headingTextArea = document.createElement("div");
                     headingTextArea.contentEditable = true;
-                    headingTextArea.classList.add("heading");
+                    headingTextArea.classList.add("heading", "edit");
                     headingTextArea.addEventListener('keydown', function(event) {
                         if (event.key === 'Tab') {
                             event.preventDefault();
@@ -167,7 +186,7 @@ function createInputComponent() {
                     // Textarea
                     let textArea = document.createElement("div");
                     textArea.contentEditable = true;
-                    textArea.classList.add("text");
+                    textArea.classList.add("text", "edit");
                     textArea.addEventListener('keydown', function(event) {
                         if (event.key === 'Tab') {
                             event.preventDefault();
@@ -201,7 +220,7 @@ function createInputComponent() {
                     // Textarea
                     let codeArea = document.createElement("div");
                     codeArea.contentEditable = true;
-                    codeArea.classList.add("code");
+                    codeArea.classList.add("code", "edit");
                     codeArea.addEventListener('keydown', function(event) {
                         if (event.key === 'Tab') {
                             event.preventDefault();
@@ -221,18 +240,37 @@ function createInputComponent() {
             });
             let tagButton = document.createElement("i");
             tagButton.classList.add("bi", "bi-textarea-t");
-            tagButton.addEventListener("click", function() {
-                // <span class="notice"></span>
-            });
+
             toolbarButtons.appendChild(titleButton);
             toolbarButtons.appendChild(textButton);
             toolbarButtons.appendChild(codeButton);
-            toolbarButtons.appendChild(tagButton);
+            // toolbarButtons.appendChild(tagButton); // Doesn't work
 
             let saveButton = document.createElement("i");
             saveButton.classList.add("bi", "bi-plus-lg");
             saveButton.addEventListener("click", function() {
-                // To Do
+                // Check if there are any added fields
+                let addedFields = inputs.querySelectorAll('.heading, .code, .text');
+                if (addedFields.length === 0) {
+                    alert("You need to add and fill at least one field to save.");
+                    return;
+                }
+                // Check if all added fields are filled before cloning
+                let allFieldsFilled = true;
+                addedFields.forEach(field => {
+                    if (field.textContent.trim() === '') {
+                        allFieldsFilled = false;
+                    }
+                });
+                // Check if all added fields are filled
+                if (allFieldsFilled) {
+                    // Clone the current input container
+                    let clonedInputComponent = cloneInputComponent();
+                    mainWrapper.appendChild(clonedInputComponent);
+                    mainWrapper.style.display = "flex";
+                } else {
+                    alert("You need to fill all added fields to save.")
+                }         
             });
 
         toolbar.appendChild(toolbarButtons);
@@ -244,5 +282,12 @@ function createInputComponent() {
     return inputComponent;
 }
 
-let main = document.getElementById('main-wrapper');
+let main = document.getElementById('main');
 main.appendChild(createInputComponent());
+
+let mainWrapper = document.getElementById('main-wrapper');
+if (mainWrapper.querySelector("div")) {
+    mainWrapper.style.display = "flex";
+} else {
+    mainWrapper.style.display = "none";
+}
