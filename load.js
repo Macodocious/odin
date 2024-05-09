@@ -267,10 +267,14 @@ function createInputComponent() {
                     // Clone the current input container
                     let clonedInputComponent = cloneInputComponent();
                     mainWrapper.appendChild(clonedInputComponent);
-                    mainWrapper.style.display = "flex";
+                    if (mainWrapper.querySelector('div')) {
+                        mainWrapper.style.display = "flex";
+                    } else {
+                        mainWrapper.style.display = "none";
+                    }
                 } else {
                     alert("You need to fill all added fields to save.")
-                }         
+                }    
             });
 
         toolbar.appendChild(toolbarButtons);
@@ -286,7 +290,7 @@ let main = document.getElementById('main');
 main.appendChild(createInputComponent());
 
 let mainWrapper = document.getElementById('main-wrapper');
-if (mainWrapper.querySelector("div")) {
+if (mainWrapper.querySelector('div')) {
     mainWrapper.style.display = "flex";
 } else {
     mainWrapper.style.display = "none";
