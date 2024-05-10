@@ -105,6 +105,7 @@ container.appendChild(createNavigationComponent());
 // Declare inputs outside of the function to make it accessible globally
 let inputComponent;
 let inputs;
+let saveButton;
 
 // Function to clone the input container and remove the toolbar, "edit" class, and make it read-only
 function cloneInputComponent() {
