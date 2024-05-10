@@ -28,13 +28,13 @@ function createNavigationComponent() {
 
     // Create first block
     let block1 = createBlock("Course", [ // Square brackets only used to create array literal, curly only used to create object literal.
-        createNavLink("Foundations", "/index.html")
+        createNavLink("Foundations", "index.html")
     ]);
 
     // Create second block
     let block2 = createBlock("Section", [
-        createNavLink("Variables & Operators", "/variables_operators.html"),
-        createNavLink("Data Types & Conditionals", "/datatypes_conditionals.html"),
+        createNavLink("Variables & Operators", "variables_operators.html"),
+        createNavLink("Data Types & Conditionals", "datatypes_conditionals.html"),
         createNavLink("JavaScript Developer Tools"),
         createNavLink("Function Basics"),
         createNavLink("Problem Solving"),
