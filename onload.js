@@ -315,7 +315,9 @@ function cloneInputComponent() {
                                     contentEditable.forEach(element => {
                                         element.contentEditable = false; // Make it read-only
                                     });
-                                    inputSettings.style.display = "flex";                         
+                                    inputSettings.style.display = "flex";
+                                    const mainWrapperData = gatherMainWrapperData();
+                                    saveToGitHub(mainWrapperData);                         
                                 } else {
                                     alert("You need to fill all added fields to save.")
                                 }    
@@ -529,6 +531,8 @@ function createInputComponent() {
                     } else {
                         mainWrapper.style.display = "none";
                     }
+                    const mainWrapperData = gatherMainWrapperData();
+                    saveToGitHub(mainWrapperData);
                 } else {
                     alert("You need to fill all added fields to save.")
                 }    
