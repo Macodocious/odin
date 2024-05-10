@@ -147,6 +147,7 @@ button {
 .input-container {
     height: fit-content;
     min-height: unset;
+    position: relative;
 }
 
 .inputs {
@@ -185,9 +186,16 @@ button {
     position: relative;
 }
 
+.heading-wrapper:first-child,
+.text-wrapper:first-child,
+.code-wrapper:first-child {
+    margin-right: 3rem;
+}
+
 .code-wrapper {
     border: 0.0625rem solid #d3d3d3;
     border-radius: 0.75rem;
+    margin: 1rem 0;
     .label-wrapper {
         border-bottom: 0.0625rem solid #d3d3d3;
         padding: 0.5rem 1rem;
@@ -195,9 +203,22 @@ button {
     }
 }
 
+.code-wrapper:last-child {
+    margin: 1rem 0 0; 
+}
+
 .code-wrapper .label-wrapper.edit {
     border: none;
     background-color: #e9e9e9;
+}
+
+.heading-wrapper.edit,
+.text-wrapper.edit,
+.code-wrapper.edit {
+    background-color: #f3f3f3;
+    border-radius: 0.75rem;
+    border: none;
+    margin: 0;
 }
 
 .heading,
@@ -238,16 +259,9 @@ button {
     font-size: 0.75rem;
 }
 
-.heading-wrapper.edit,
-.text-wrapper.edit,
-.code-wrapper.edit {
-    background-color: #f3f3f3;
-    border-radius: 0.75rem;
-    border: none;
-}
-
 .delete-heading,
-.delete-text {
+.delete-text,
+.delete-code {
     font-size: 0.75rem;
     position: absolute;
     right: 1.125rem;
@@ -256,8 +270,15 @@ button {
 }
 
 .delete-heading.edit,
-.delete-text.edit {
+.delete-text.edit,
+.delete-code.edit {
     display: block;
 }
 
-
+.input-settings {
+    display: flex;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    gap: 1rem;
+}

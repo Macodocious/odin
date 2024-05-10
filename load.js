@@ -110,7 +110,7 @@ let inputs;
 function cloneInputComponent() {
     let clonedInputComponent = inputComponent.cloneNode(true); // Clone the input container
     clonedInputComponent.removeAttribute('id'); // Remove the id attribute
-    clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.remove()); // Remove the label-wrapper div
+    clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "none"); // Remove the label-wrapper div
     clonedInputComponent.querySelectorAll('.toolbar').forEach(toolbar => toolbar.remove()); // Remove the toolbar
     let editElements = clonedInputComponent.querySelectorAll('.edit'); // Find all elements with class "edit"
     editElements.forEach(element => {
@@ -121,6 +121,212 @@ function cloneInputComponent() {
         element.contentEditable = false; // Make it read-only
     });
     inputs.innerHTML = ''; // Clear the content of the original input container
+    // Reinitialize delete function for cloned delete buttons
+    clonedInputComponent.querySelectorAll('.delete-heading, .delete-text, .delete-code').forEach(deleteButton => {
+        deleteButton.addEventListener('click', function() {
+            deleteButton.parentElement.remove();
+        });
+    });
+    let inputSettings = document.createElement("div");
+    inputSettings.classList.add("input-settings");
+        let editInput = document.createElement("i");
+        editInput.classList.add("bi", "bi-pencil-square");
+        editInput.addEventListener("click", function() {
+            inputSettings.style.display = "none";
+            clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "block");
+            // Basically copypasta function for toolbar
+            let toolbar = document.createElement("div");
+            toolbar.classList.add("toolbar");
+                let toolbarButtons = document.createElement("div");
+                toolbarButtons.classList.add("toolbar-buttons");
+                    let titleButton = document.createElement("i");
+                    titleButton.classList.add("bi", "bi-type-h1");
+                    titleButton.addEventListener("click", function() {
+                        let headingWrapper = document.createElement("div");
+                        headingWrapper.classList.add("heading-wrapper", "edit");
+                            // Label
+                            let headingLabelWrapper = document.createElement("div");
+                            headingLabelWrapper.classList.add("label-wrapper", "edit");
+                                let headingLabel = document.createElement("p");
+                                headingLabel.classList.add("label");
+                                headingLabel.textContent = "Heading";
+                                headingLabelWrapper.appendChild(headingLabel)
+                            headingWrapper.appendChild(headingLabelWrapper);
+                            // Textarea
+                            let headingTextArea = document.createElement("div");
+                            headingTextArea.contentEditable = true;
+                            headingTextArea.classList.add("heading", "edit");
+                            headingTextArea.addEventListener('keydown', function(event) {
+                                if (event.key === 'Tab') {
+                                    event.preventDefault();
+                                    document.execCommand('insertText', false, '    ');
+                                }
+                            });
+                            headingTextArea.addEventListener('paste', function(event) {
+                                // Prevent the default behavior of pasting formatted text
+                                event.preventDefault();                    
+                                // Get the plain text content from the clipboard
+                                let plainText = (event.clipboardData || window.clipboardData).getData('text/plain');                    
+                                // Insert the plain text into the text area
+                                document.execCommand('insertText', false, plainText);
+                            });
+                            headingWrapper.appendChild(headingTextArea);
+                            // Delete
+                            let deleteHeading = document.createElement("i");
+                            deleteHeading.classList.add("bi", "bi-x-lg", "delete-heading", "edit");
+                            deleteHeading.addEventListener("click", function() {
+                                this.parentNode.remove();
+                                event.stopPropagation;
+                            });
+                            headingWrapper.appendChild(deleteHeading);
+                        clonedInputComponent.querySelector(".inputs").appendChild(headingWrapper);             
+                    });
+                    let textButton = document.createElement("i");
+                    textButton.classList.add("bi", "bi-type");
+                    textButton.addEventListener("click", function() {
+                        let textWrapper = document.createElement("div");
+                        textWrapper.classList.add("text-wrapper", "edit");
+                            // Label
+                            let textLabelWrapper = document.createElement("div");
+                            textLabelWrapper.classList.add("label-wrapper", "edit");
+                                let textLabel = document.createElement("p");
+                                textLabel.classList.add("label");
+                                textLabel.textContent = "Text";
+                                textLabelWrapper.appendChild(textLabel)
+                            textWrapper.appendChild(textLabelWrapper);
+                            // Textarea
+                            let textArea = document.createElement("div");
+                            textArea.contentEditable = true;
+                            textArea.classList.add("text", "edit");
+                            textArea.addEventListener('keydown', function(event) {
+                                if (event.key === 'Tab') {
+                                    event.preventDefault();
+                                    document.execCommand('insertText', false, '    ');
+                                }
+                            });
+                            textArea.addEventListener('paste', function(event) {
+                                // Prevent the default behavior of pasting formatted text
+                                event.preventDefault();                    
+                                // Get the plain text content from the clipboard
+                                let plainText = (event.clipboardData || window.clipboardData).getData('text/plain');                    
+                                // Insert the plain text into the text area
+                                document.execCommand('insertText', false, plainText);
+                            });
+                            textWrapper.appendChild(textArea);
+                            // Delete
+                            let deleteTextArea = document.createElement("i");
+                            deleteTextArea.classList.add("bi", "bi-x-lg", "delete-text", "edit");
+                            deleteTextArea.addEventListener("click", function() {
+                                this.parentNode.remove();
+                                event.stopPropagation;
+                            });
+                            textWrapper.appendChild(deleteTextArea);
+                        clonedInputComponent.querySelector(".inputs").appendChild(textWrapper);      
+                    });       
+                    let codeButton = document.createElement("i");
+                    codeButton.classList.add("bi", "bi-code-slash");
+                    codeButton.addEventListener("click", function() {
+                        let codeWrapper = document.createElement("div");
+                        codeWrapper.classList.add("code-wrapper", "edit");
+                            // Label
+                            let codeLabelWrapper = document.createElement("div");
+                            codeLabelWrapper.classList.add("label-wrapper", "edit");
+                                let codeLabel = document.createElement("p");
+                                codeLabel.classList.add("label");
+                                codeLabel.textContent = "Code";
+                                codeLabelWrapper.appendChild(codeLabel)
+                                codeWrapper.appendChild(codeLabelWrapper);
+                            // Textarea
+                            let codeArea = document.createElement("div");
+                            codeArea.contentEditable = true;
+                            codeArea.classList.add("code", "edit");
+                            codeArea.addEventListener('keydown', function(event) {
+                                if (event.key === 'Tab') {
+                                    event.preventDefault();
+                                    document.execCommand('insertText', false, '    ');
+                                }
+                            });
+                            codeArea.addEventListener('paste', function(event) {
+                                // Prevent the default behavior of pasting formatted text
+                                event.preventDefault();                  
+                                // Get the plain text content from the clipboard
+                                let plainText = (event.clipboardData || window.clipboardData).getData('text/plain');          
+                                // Insert the plain text into the text area
+                                document.execCommand('insertText', false, plainText);
+                            });
+                            codeWrapper.appendChild(codeArea);
+                            // Delete
+                            let deleteCodeArea = document.createElement("i");
+                            deleteCodeArea.classList.add("bi", "bi-x-lg", "delete-text", "edit");
+                            deleteCodeArea.addEventListener("click", function() {
+                                this.parentNode.remove();
+                                event.stopPropagation;
+                            });
+                            codeWrapper.appendChild(deleteCodeArea);
+                        clonedInputComponent.querySelector(".inputs").appendChild(codeWrapper);  
+                    });
+                    let tagButton = document.createElement("i");
+                    tagButton.classList.add("bi", "bi-textarea-t");
+
+                    toolbarButtons.appendChild(titleButton);
+                    toolbarButtons.appendChild(textButton);
+                    toolbarButtons.appendChild(codeButton);
+                    // toolbarButtons.appendChild(tagButton); // Doesn't work
+
+                    let saveButton = document.createElement("i");
+                    saveButton.classList.add("bi", "bi-journal-arrow-up");
+                    saveButton.addEventListener("click", function() {
+                        // Check if there are any added fields
+                        let addedFields = clonedInputComponent.querySelector(".inputs").querySelectorAll('.heading, .code, .text');
+                        if (addedFields.length === 0) {
+                            alert("You need to add and fill at least one field to save.");
+                            return;
+                        }
+                        // Check if all added fields are filled before cloning
+                        let allFieldsFilled = true;
+                        addedFields.forEach(field => {
+                            if (field.textContent.trim() === '') {
+                                allFieldsFilled = false;
+                            }
+                        });
+                        // Check if all added fields are filled
+                        if (allFieldsFilled) {
+                            
+                        } else {
+                            alert("You need to fill all added fields to save.")
+                        }    
+                    });
+
+                toolbar.appendChild(toolbarButtons);
+                toolbar.appendChild(saveButton);
+
+            clonedInputComponent.appendChild(toolbar);
+            // End
+            let addEditElements = clonedInputComponent.querySelectorAll('div, i');
+                addEditElements.forEach(element => {
+                    element.classList.add('edit');
+            });
+            let contentEditable = clonedInputComponent.querySelectorAll('.heading, .code, .text');
+            contentEditable.forEach(element => {
+                element.contentEditable = true;
+            });            
+            
+        });
+        inputSettings.appendChild(editInput);
+        let deleteInput = document.createElement("i");
+        deleteInput.classList.add("bi", "bi-journal-x");
+        deleteInput.addEventListener("click", function() {
+            clonedInputComponent.remove();
+            let mainWrapper = document.getElementById('main-wrapper');
+            if (mainWrapper.querySelector('div')) {
+                mainWrapper.style.display = "flex";
+            } else {
+                mainWrapper.style.display = "none";
+            }
+        })
+        inputSettings.appendChild(deleteInput);
+
+    clonedInputComponent.appendChild(inputSettings);
     return clonedInputComponent;
 }
 
@@ -159,12 +365,20 @@ function createInputComponent() {
                             document.execCommand('insertText', false, '    ');
                         }
                     });
+                    headingTextArea.addEventListener('paste', function(event) {
+                        // Prevent the default behavior of pasting formatted text
+                        event.preventDefault();                    
+                        // Get the plain text content from the clipboard
+                        let plainText = (event.clipboardData || window.clipboardData).getData('text/plain');                    
+                        // Insert the plain text into the text area
+                        document.execCommand('insertText', false, plainText);
+                    });
                     headingWrapper.appendChild(headingTextArea);
                     // Delete
                     let deleteHeading = document.createElement("i");
                     deleteHeading.classList.add("bi", "bi-x-lg", "delete-heading", "edit");
                     deleteHeading.addEventListener("click", function() {
-                        headingWrapper.remove();
+                        this.parentNode.remove();
                         event.stopPropagation;
                     });
                     headingWrapper.appendChild(deleteHeading);
@@ -193,12 +407,20 @@ function createInputComponent() {
                             document.execCommand('insertText', false, '    ');
                         }
                     });
+                    textArea.addEventListener('paste', function(event) {
+                        // Prevent the default behavior of pasting formatted text
+                        event.preventDefault();                    
+                        // Get the plain text content from the clipboard
+                        let plainText = (event.clipboardData || window.clipboardData).getData('text/plain');                    
+                        // Insert the plain text into the text area
+                        document.execCommand('insertText', false, plainText);
+                    });
                     textWrapper.appendChild(textArea);
                     // Delete
                     let deleteTextArea = document.createElement("i");
                     deleteTextArea.classList.add("bi", "bi-x-lg", "delete-text", "edit");
                     deleteTextArea.addEventListener("click", function() {
-                        textWrapper.remove();
+                        this.parentNode.remove();
                         event.stopPropagation;
                     });
                     textWrapper.appendChild(deleteTextArea);
@@ -227,12 +449,20 @@ function createInputComponent() {
                             document.execCommand('insertText', false, '    ');
                         }
                     });
+                    codeArea.addEventListener('paste', function(event) {
+                        // Prevent the default behavior of pasting formatted text
+                        event.preventDefault();                  
+                        // Get the plain text content from the clipboard
+                        let plainText = (event.clipboardData || window.clipboardData).getData('text/plain');          
+                        // Insert the plain text into the text area
+                        document.execCommand('insertText', false, plainText);
+                    });
                     codeWrapper.appendChild(codeArea);
                     // Delete
                     let deleteCodeArea = document.createElement("i");
-                    deleteCodeArea.classList.add("bi", "bi-x-lg", "delete-text", "edit");
+                    deleteCodeArea.classList.add("bi", "bi-x-lg", "delete-code", "edit");
                     deleteCodeArea.addEventListener("click", function() {
-                        codeWrapper.remove();
+                        this.parentNode.remove();
                         event.stopPropagation;
                     });
                     codeWrapper.appendChild(deleteCodeArea);
@@ -247,7 +477,7 @@ function createInputComponent() {
             // toolbarButtons.appendChild(tagButton); // Doesn't work
 
             let saveButton = document.createElement("i");
-            saveButton.classList.add("bi", "bi-plus-lg");
+            saveButton.classList.add("bi", "bi-journal-arrow-up");
             saveButton.addEventListener("click", function() {
                 // Check if there are any added fields
                 let addedFields = inputs.querySelectorAll('.heading, .code, .text');
@@ -279,7 +509,7 @@ function createInputComponent() {
 
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
-
+    
     inputComponent.appendChild(inputs);
     inputComponent.appendChild(toolbar);
 
@@ -289,6 +519,7 @@ function createInputComponent() {
 let main = document.getElementById('main');
 main.appendChild(createInputComponent());
 
+// Check for divs under main-wrapper
 let mainWrapper = document.getElementById('main-wrapper');
 if (mainWrapper.querySelector('div')) {
     mainWrapper.style.display = "flex";
