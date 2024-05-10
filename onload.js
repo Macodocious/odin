@@ -604,12 +604,3 @@ function saveToGitHub(data) {
         console.error('Error saving data:', error);
     });
 }
-
-// Event listener for saveButton click
-saveButton.addEventListener('click', function() {
-    // Gather data to be saved (e.g., values of #main-wrapper)
-    const mainWrapperData = gatherMainWrapperData();
-
-    // Save data to GitHub
-    saveToGitHub(mainWrapperData);
-});
