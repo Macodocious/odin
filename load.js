@@ -273,32 +273,58 @@ function cloneInputComponent() {
                     toolbarButtons.appendChild(codeButton);
                     // toolbarButtons.appendChild(tagButton); // Doesn't work
 
-                    let saveButton = document.createElement("i");
-                    saveButton.classList.add("bi", "bi-journal-arrow-up");
-                    saveButton.addEventListener("click", function() {
-                        // Check if there are any added fields
-                        let addedFields = clonedInputComponent.querySelector(".inputs").querySelectorAll('.heading, .code, .text');
-                        if (addedFields.length === 0) {
-                            alert("You need to add and fill at least one field to save.");
-                            return;
-                        }
-                        // Check if all added fields are filled before cloning
-                        let allFieldsFilled = true;
-                        addedFields.forEach(field => {
-                            if (field.textContent.trim() === '') {
-                                allFieldsFilled = false;
+                    let editToolbarButtons = document.createElement("div");
+                    editToolbarButtons.classList.add("toolbar-buttons");
+                        let deleteButton = document.createElement("i");
+                        deleteButton.classList.add("bi", "bi-journal-x");
+                        deleteButton.addEventListener("click", function() {
+                            clonedInputComponent.remove();
+                            let mainWrapper = document.getElementById('main-wrapper');
+                            if (mainWrapper.querySelector('div')) {
+                                mainWrapper.style.display = "flex";
+                            } else {
+                                mainWrapper.style.display = "none";
                             }
-                        });
-                        // Check if all added fields are filled
-                        if (allFieldsFilled) {
-                            
-                        } else {
-                            alert("You need to fill all added fields to save.")
-                        }    
-                    });
+                        })
+                        let saveButton = document.createElement("i");
+                            saveButton.classList.add("bi", "bi-journal-check");
+                            saveButton.addEventListener("click", function() {
+                                // Check if there are any added fields
+                                let addedFields = clonedInputComponent.querySelector(".inputs").querySelectorAll('.heading, .code, .text');
+                                if (addedFields.length === 0) {
+                                    alert("You need to add and fill at least one field to save.");
+                                    return;
+                                }
+                                // Check if all added fields are filled before cloning
+                                let allFieldsFilled = true;
+                                addedFields.forEach(field => {
+                                    if (field.textContent.trim() === '') {
+                                        allFieldsFilled = false;
+                                    }
+                                });
+                                // Check if all added fields are filled
+                                if (allFieldsFilled) {
+                                    clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "none"); // Remove the label-wrapper div
+                                    clonedInputComponent.querySelectorAll('.toolbar').forEach(toolbar => toolbar.remove()); // Remove the toolbar
+                                    let editElements = clonedInputComponent.querySelectorAll('.edit'); // Find all elements with class "edit"
+                                    editElements.forEach(element => {
+                                        element.classList.remove('edit'); // Remove the "edit" class
+                                    });
+                                    let contentEditable = clonedInputComponent.querySelectorAll('.heading, .code, .text');
+                                    contentEditable.forEach(element => {
+                                        element.contentEditable = false; // Make it read-only
+                                    });
+                                    inputSettings.style.display = "flex";                         
+                                } else {
+                                    alert("You need to fill all added fields to save.")
+                                }    
+                            });
+
+                    editToolbarButtons.appendChild(saveButton);
+                    editToolbarButtons.appendChild(deleteButton);
 
                 toolbar.appendChild(toolbarButtons);
-                toolbar.appendChild(saveButton);
+                toolbar.appendChild(editToolbarButtons);
 
             clonedInputComponent.appendChild(toolbar);
             // End
