@@ -315,9 +315,7 @@ function cloneInputComponent() {
                                     contentEditable.forEach(element => {
                                         element.contentEditable = false; // Make it read-only
                                     });
-                                    inputSettings.style.display = "flex";
-                                    const mainWrapperData = gatherMainWrapperData();
-                                    saveToGitHub(mainWrapperData);                         
+                                    inputSettings.style.display = "flex";                        
                                 } else {
                                     alert("You need to fill all added fields to save.")
                                 }    
@@ -531,8 +529,6 @@ function createInputComponent() {
                     } else {
                         mainWrapper.style.display = "none";
                     }
-                    const mainWrapperData = gatherMainWrapperData();
-                    saveToGitHub(mainWrapperData);
                 } else {
                     alert("You need to fill all added fields to save.")
                 }    
@@ -556,51 +552,4 @@ if (mainWrapper.querySelector('div')) {
     mainWrapper.style.display = "flex";
 } else {
     mainWrapper.style.display = "none";
-}
-
-// Saving
-// Function to save data to GitHub
-function saveToGitHub(data) {
-    // GitHub repository information
-    const username = 'macodocious';
-    const repository = 'odin';
-    const filePath = 'data/main-wrapper-data.json'; // Path to the file in the repository
-
-    // Personal access token for authentication
-    const accessToken = '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';
-
-    // GitHub API endpoint
-    const apiUrl = `https://api.github.com/repos/${username}/${repository}/contents/${filePath}`;
-
-    // Data to be saved (convert to JSON format)
-    const content = JSON.stringify(data);
-
-    // Request headers
-    const headers = new Headers({
-        'Authorization': `token ${accessToken}`,
-        'Content-Type': 'application/json',
-    });
-
-    // Request body
-    const body = {
-        message: 'Update main-wrapper data',
-        content: btoa(content), // Encode content as base64
-    };
-
-    // POST request to GitHub API to create or update file
-    fetch(apiUrl, {
-        method: 'PUT',
-        headers: headers,
-        body: JSON.stringify(body)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Data saved successfully');
-        } else {
-            console.error('Failed to save data:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error saving data:', error);
-    });
 }
