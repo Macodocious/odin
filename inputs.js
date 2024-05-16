@@ -1,6 +1,7 @@
 // Global Declarations
 let inputContainer;
 
+// Create component
 function createInputComponent() {
     createInputContainer();
     
@@ -91,20 +92,20 @@ function cloneInputComponent() {
             contentEditable.forEach(element => {
                 element.contentEditable = true;
             });
-            // Create button to delete component
-            let deleteInput = document.createElement("i");
-            deleteInput.classList.add("bi", "bi-journal-x");
-            deleteInput.addEventListener("click", function() {
-                clonedInputComponent.remove();
-                let mainWrapper = document.getElementById('main-wrapper');
-                if (mainWrapper.querySelector('div')) {
-                    mainWrapper.style.display = "flex";
-                } else {
-                    mainWrapper.style.display = "none";
-                }
-            })
-            inputSettings.appendChild(deleteInput);
         });
+        // Create button to delete component
+        let deleteInput = document.createElement("i");
+        deleteInput.classList.add("bi", "bi-journal-x");
+        deleteInput.addEventListener("click", function() {
+            clonedInputComponent.remove();
+            let mainWrapper = document.getElementById('main-wrapper');
+            if (mainWrapper.querySelector('div')) {
+                mainWrapper.style.display = "flex";
+            } else {
+                mainWrapper.style.display = "none";
+            }
+        })
+        inputSettings.appendChild(deleteInput);
     clonedInputComponent.appendChild(inputSettings);
 
     return clonedInputComponent;          
