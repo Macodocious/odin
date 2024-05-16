@@ -4,7 +4,7 @@ let isClone = false;
 function cloneInputComponent() {
     // Clone Input Container
     let clonedInputComponent = inputContainer.cloneNode(true);
-    // Add identifier for clone
+    // Add flag for clone
     isClone = true;
     // Remove ID (#input-container)
     clonedInputComponent.removeAttribute('id');
