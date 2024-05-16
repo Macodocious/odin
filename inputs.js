@@ -111,13 +111,6 @@ function createToolbar() {
     return toolbar;
 }
 
-// Create Toolbar Wrapper
-toolbarButtons = document.createElement("div");
-toolbarButtons.classList.add("toolbar-buttons");
-toolbarButtons.appendChild(createHeadingButton());
-toolbarButtons.appendChild(createTextButton());
-toolbarButtons.appendChild(createCodeButton());
-
 // Create button for Headings
 function createHeadingButton() {
     headingButton = document.createElement("i");
@@ -164,9 +157,10 @@ function createHeadingButton() {
             inputs.appendChild(headingWrapper);
         } else {
             clonedInputComponent.querySelector(".inputs").appendChild(headingWrapper);
-        }
-        
+        }    
     });
+
+    return headingButton;
 }
 
 // Create button for Text
@@ -217,6 +211,8 @@ function createTextButton() {
             clonedInputComponent.querySelector(".inputs").appendChild(textWrapper);
         }    
     });
+    
+    return textButton;
 }
 
 // Create button for Code
@@ -267,6 +263,8 @@ function createCodeButton() {
             clonedInputComponent.querySelector(".inputs").appendChild(codeWrapper);
         }
     });
+    
+    return codeButton;
 }
 
 // Create button for saving
@@ -355,6 +353,13 @@ editToolbarButtons.classList.add("toolbar-buttons");
 
     editToolbarButtons.appendChild(editSaveButton);
     editToolbarButtons.appendChild(editDeleteButton);
+
+// Create Toolbar Wrapper
+toolbarButtons = document.createElement("div");
+toolbarButtons.classList.add("toolbar-buttons");
+toolbarButtons.appendChild(createHeadingButton());
+toolbarButtons.appendChild(createTextButton());
+toolbarButtons.appendChild(createCodeButton());
 
 let main = document.getElementById('main');
 main.appendChild(createInputComponent());
