@@ -31,7 +31,7 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    if (!inputContainer.getAttribute('clone')) {
+    if (!inputContainer.getAttribute('data-clone')) {
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
     } else {
@@ -53,7 +53,7 @@ function cloneInputComponent() {
     // Clone Input Container
     let clonedInputComponent = inputContainer.cloneNode(true);
     // Add clone attribute
-    clonedInputComponent.setAttribute('clone', 'true');
+    clonedInputComponent.setAttribute('data-clone', 'true');
     // Remove ID (#input-container)
     clonedInputComponent.removeAttribute('id');
     // Remove Label Wrapper
