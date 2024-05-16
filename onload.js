@@ -101,6 +101,7 @@ let container = document.getElementById("navigationContainer");
 container.appendChild(createNavigationComponent());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 
 // Declare inputs outside of the function to make it accessible globally
 let inputComponent;
@@ -553,3 +554,4 @@ if (mainWrapper.querySelector('div')) {
 } else {
     mainWrapper.style.display = "none";
 }
+*/

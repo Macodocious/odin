@@ -3,6 +3,7 @@ let inputComponent;
 let inputs;
 let toolbar;
 let toolbarButtons;
+let editToolbarButtons;
 let headingButton;
 let textButton;
 let codeButton;
@@ -41,7 +42,33 @@ function cloneInputComponent() {
             clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "block");
             // Add Toolbar
             createToolbar();
-            // Add Clone Toolbar Buttons (Line 277 of Original)
+            // Adds edit class back to elements
+            let addEditElements = clonedInputComponent.querySelectorAll('div, i');
+            addEditElements.forEach(element => {
+                element.classList.add('edit');
+            });
+            // Allows content to be editable
+            let contentEditable = clonedInputComponent.querySelectorAll('.heading, .code, .text');
+            contentEditable.forEach(element => {
+                element.contentEditable = true;
+            });
+            // Create button to delete component
+            let deleteInput = document.createElement("i");
+            deleteInput.classList.add("bi", "bi-journal-x");
+            deleteInput.addEventListener("click", function() {
+                clonedInputComponent.remove();
+                let mainWrapper = document.getElementById('main-wrapper');
+                if (mainWrapper.querySelector('div')) {
+                    mainWrapper.style.display = "flex";
+                } else {
+                    mainWrapper.style.display = "none";
+                }
+            })
+            inputSettings.appendChild(deleteInput);
+        });
+    clonedInputComponent.appendChild(inputSettings);
+    
+    return clonedInputComponent;          
 }
 
 function createInputComponent() {
@@ -75,8 +102,13 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    toolbar.appendChild(toolbarButtons);
-    toolbar.appendChild(saveButton);
+    if (inputs.parentElement.id === "input-container") {
+        toolbar.appendChild(toolbarButtons);
+        toolbar.appendChild(saveButton);
+    } else {
+        toolbar.appendChild(toolbarButtons);
+        toolbar.appendChild(editToolbarButtons);
+    }
 
     return toolbar;
 }
@@ -128,7 +160,7 @@ headingButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         headingWrapper.appendChild(deleteHeading);
-    // Appends wrapper for Heading Component to Inputs depending on if clone or not
+    // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
     if (inputs.parentElement.id === "input-container") {
         inputs.appendChild(headingWrapper);
     } else {
@@ -177,7 +209,7 @@ textButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         textWrapper.appendChild(deleteTextArea);
-    // Appends wrapper for Heading Component to Inputs depending on if clone or not
+    // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
     if (inputs.parentElement.id === "input-container") {
         inputs.appendChild(textWrapper);
     } else {
@@ -225,7 +257,7 @@ codeButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         codeWrapper.appendChild(deleteCodeArea);
-    // Appends wrapper for Heading Component to Inputs depending on if clone or not
+    // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
     if (inputs.parentElement.id === "input-container") {
         inputs.appendChild(codeWrapper);
     } else {
@@ -266,6 +298,59 @@ saveButton.addEventListener("click", function() {
         alert("You need to fill all added fields to save.")
     }    
 });
+
+// Create Edit Buttons for Toolbar
+editToolbarButtons = document.createElement("div");
+editToolbarButtons.classList.add("toolbar-buttons");
+    // Create button for deleting
+    let editDeleteButton = document.createElement("i");
+    editDeleteButton.classList.add("bi", "bi-journal-x");
+    editDeleteButton.addEventListener("click", function() {
+        clonedInputComponent.remove();
+        let mainWrapper = document.getElementById('main-wrapper');
+        if (mainWrapper.querySelector('div')) {
+            mainWrapper.style.display = "flex";
+        } else {
+            mainWrapper.style.display = "none";
+        }
+    })
+    // Create button for saving
+    let editSaveButton = document.createElement("i");
+    editSaveButton.classList.add("bi", "bi-journal-check");
+    editSaveButton.addEventListener("click", function() {
+        // Check if there are any added fields
+        let addedFields = clonedInputComponent.querySelector(".inputs").querySelectorAll('.heading, .code, .text');
+        if (addedFields.length === 0) {
+            alert("You need to add and fill at least one field to save.");
+            return;
+        }
+        // Check if all added fields are filled before cloning
+        let allFieldsFilled = true;
+        addedFields.forEach(field => {
+            if (field.textContent.trim() === '') {
+                allFieldsFilled = false;
+            }
+        });
+        // Check if all added fields are filled
+        if (allFieldsFilled) {
+            clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "none"); // Remove the label-wrapper div
+            clonedInputComponent.querySelectorAll('.toolbar').forEach(toolbar => toolbar.remove()); // Remove the toolbar
+            let editElements = clonedInputComponent.querySelectorAll('.edit'); // Find all elements with class "edit"
+            editElements.forEach(element => {
+                element.classList.remove('edit'); // Remove the "edit" class
+            });
+            let contentEditable = clonedInputComponent.querySelectorAll('.heading, .code, .text');
+            contentEditable.forEach(element => {
+                element.contentEditable = false; // Make it read-only
+            });
+            inputSettings.style.display = "flex";                        
+        } else {
+            alert("You need to fill all added fields to save.")
+        }    
+    });
+
+    editToolbarButtons.appendChild(editSaveButton);
+    editToolbarButtons.appendChild(editDeleteButton);
 
 let main = document.getElementById('main');
 main.appendChild(createInputComponent());
