@@ -31,7 +31,7 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    if (!inputContainer.getAttribute('data-clone')) {
+    if (inputContainer.getAttribute('data-clone') === false) {
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
     } else {
