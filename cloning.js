@@ -1,8 +1,11 @@
+// Global Declarations
+let isClone = false;
+
 function cloneInputComponent() {
     // Clone Input Container
     let clonedInputComponent = inputContainer.cloneNode(true);
-    // Add clone attribute
-    clonedInputComponent.setAttribute('data-clone', 'true');
+    // Add identifier for clone
+    isClone = true;
     // Remove ID (#input-container)
     clonedInputComponent.removeAttribute('id');
     // Remove Label Wrapper
