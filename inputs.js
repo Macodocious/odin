@@ -1,3 +1,6 @@
+// Global Declarations
+let inputContainer;
+
 function createInputComponent() {
     createInputContainer();
     
@@ -47,7 +50,7 @@ toolbarButtons.appendChild(codeButton);
 
 function cloneInputComponent() {
     // Clone Input Container
-    let clonedInputComponent = inputComponent.cloneNode(true);
+    let clonedInputComponent = inputContainer.cloneNode(true);
     // Remove ID (#input-container)
     clonedInputComponent.removeAttribute('id');
     // Remove Label Wrapper

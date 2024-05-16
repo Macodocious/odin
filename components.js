@@ -1,9 +1,4 @@
 // Global Declarations
-let inputComponent;
-let inputs;
-let toolbar;
-let toolbarButtons;
-let editToolbarButtons;
 let headingButton;
 let textButton;
 let codeButton;
