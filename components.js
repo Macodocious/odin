@@ -45,7 +45,7 @@ headingButton.addEventListener("click", function() {
         });
         headingWrapper.appendChild(deleteHeading);
     // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
-    if (inputs.parentElement.id === "input-container") {
+    if (!isClone) {
         inputs.appendChild(headingWrapper);
     } else {
         clonedInputComponent.querySelector(".inputs").appendChild(headingWrapper);
@@ -93,7 +93,7 @@ textButton.addEventListener("click", function() {
         });
         textWrapper.appendChild(deleteTextArea);
     // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
-    if (inputs.parentElement.id === "input-container") {
+    if (!isClone) {
         inputs.appendChild(textWrapper);
     } else {
         clonedInputComponent.querySelector(".inputs").appendChild(textWrapper);
@@ -141,7 +141,7 @@ codeButton.addEventListener("click", function() {
         });
         codeWrapper.appendChild(deleteCodeArea);
     // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
-    if (inputs.parentElement.id === "input-container") {
+    if (!isClone) {
         inputs.appendChild(codeWrapper);
     } else {
         clonedInputComponent.querySelector(".inputs").appendChild(codeWrapper);
