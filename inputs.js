@@ -1,6 +1,5 @@
 // Global Declarations
 let inputContainer;
-let isClone = false;
 
 // Create component
 function createInputComponent() {
@@ -32,7 +31,7 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    if (isClone) {
+    if (!inputContainer.getAttribute('clone') {
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
     } else {
@@ -51,10 +50,10 @@ toolbarButtons.appendChild(textButton);
 toolbarButtons.appendChild(codeButton);
 
 function cloneInputComponent() {
-    // Set flag to true when cloning
-    isClone = true;
     // Clone Input Container
     let clonedInputComponent = inputContainer.cloneNode(true);
+    // Add clone attribute
+    clonedInputComponent.setAttribute('clone', 'true');
     // Remove ID (#input-container)
     clonedInputComponent.removeAttribute('id');
     // Remove Label Wrapper
@@ -69,7 +68,7 @@ function cloneInputComponent() {
     // Make content readOnly
     let contentEditable = clonedInputComponent.querySelectorAll('.heading, .code, .text');
     contentEditable.forEach(element => {
-        element.contentEditable = false; // Make it read-only
+        element.contentEditable = false;
     });
     // Clear Original Input Container
     inputs.innerHTML = '';
