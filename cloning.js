@@ -1,6 +1,7 @@
 // Global Declarations
 let isClone = false;
 let clonedInputComponent;
+let inputSettings;
 
 function cloneInputComponent() {
     // Clone Input Container
@@ -26,7 +27,7 @@ function cloneInputComponent() {
     // Clear Original Input Container
     inputs.innerHTML = '';
     // Create Cloned Input Component Settings
-    let inputSettings = document.createElement("div");
+    inputSettings = document.createElement("div");
     inputSettings.classList.add("input-settings");
         let editInput = document.createElement("i");
         editInput.classList.add("bi", "bi-pencil-square");
