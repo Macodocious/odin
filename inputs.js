@@ -1,5 +1,6 @@
 // Global Declarations
 let inputContainer;
+let isClone = false;
 
 // Create component
 function createInputComponent() {
@@ -31,7 +32,7 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    if (inputContainer.id === "input-container") {
+    if (isClone) {
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
     } else {
@@ -50,6 +51,8 @@ toolbarButtons.appendChild(textButton);
 toolbarButtons.appendChild(codeButton);
 
 function cloneInputComponent() {
+    // Set flag to true when cloning
+    isClone = true;
     // Clone Input Container
     let clonedInputComponent = inputContainer.cloneNode(true);
     // Remove ID (#input-container)
