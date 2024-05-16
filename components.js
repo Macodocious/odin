@@ -92,7 +92,7 @@ textButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         textWrapper.appendChild(deleteTextArea);
-    // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
+    // Appends wrapper for Text Component to Inputs depending on if component is clone or not
     if (!isClone) {
         inputs.appendChild(textWrapper);
     } else {
@@ -140,7 +140,7 @@ codeButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         codeWrapper.appendChild(deleteCodeArea);
-    // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
+    // Appends wrapper for Code Component to Inputs depending on if component is clone or not
     if (!isClone) {
         inputs.appendChild(codeWrapper);
     } else {

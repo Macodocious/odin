@@ -1,9 +1,10 @@
 // Global Declarations
 let isClone = false;
+let clonedInputComponent;
 
 function cloneInputComponent() {
     // Clone Input Container
-    let clonedInputComponent = inputContainer.cloneNode(true);
+    clonedInputComponent = inputContainer.cloneNode(true);
     // Add flag for clone
     isClone = true;
     // Remove ID (#input-container)
