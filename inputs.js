@@ -31,7 +31,7 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    if (inputs.parentElement.id === "input-container") {
+    if (inputContainer.id === "input-container") {
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
     } else {
