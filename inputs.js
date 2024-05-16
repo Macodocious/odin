@@ -73,8 +73,6 @@ function cloneInputComponent() {
 
 function createInputComponent() {
     createInputContainer();
-        createInputs();
-        createToolbar();
     
     return inputContainer;
 }
@@ -84,7 +82,7 @@ function createInputContainer() {
     inputContainer = document.createElement("div");
     inputContainer.setAttribute("id", "input-container");
     inputContainer.classList.add("input-container");
-    inputContainer.appendChild(inputs);
+    inputContainer.appendChild(createInputs());
     inputContainer.appendChild(createToolbar());
 
     return inputContainer;
