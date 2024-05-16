@@ -93,6 +93,7 @@ function cloneInputComponent() {
                 element.contentEditable = true;
             });
         });
+        inputSettings.appendChild(editInput);
         // Create button to delete component
         let deleteInput = document.createElement("i");
         deleteInput.classList.add("bi", "bi-journal-x");
