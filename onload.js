@@ -101,6 +101,16 @@ let container = document.getElementById("navigationContainer");
 container.appendChild(createNavigationComponent());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Checks for divs inside of main-wrapper
+let mainWrapper = document.getElementById('main-wrapper');
+if (mainWrapper.querySelector('div')) {
+    mainWrapper.style.display = "flex";
+} else {
+    mainWrapper.style.display = "none";
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 
 // Declare inputs outside of the function to make it accessible globally
