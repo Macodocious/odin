@@ -67,7 +67,7 @@ function cloneInputComponent() {
             inputSettings.appendChild(deleteInput);
         });
     clonedInputComponent.appendChild(inputSettings);
-    
+
     return clonedInputComponent;          
 }
 
@@ -112,13 +112,6 @@ function createToolbar() {
 
     return toolbar;
 }
-
-// Create Toolbar Wrapper
-toolbarButtons = document.createElement("div");
-toolbarButtons.classList.add("toolbar-buttons");
-toolbarButtons.appendChild(headingButton);
-toolbarButtons.appendChild(textButton);
-toolbarButtons.appendChild(codeButton);
 
 // Create button for Headings
 headingButton = document.createElement("i");
@@ -351,6 +344,13 @@ editToolbarButtons.classList.add("toolbar-buttons");
 
     editToolbarButtons.appendChild(editSaveButton);
     editToolbarButtons.appendChild(editDeleteButton);
+
+// Create Toolbar Wrapper
+toolbarButtons = document.createElement("div");
+toolbarButtons.classList.add("toolbar-buttons");
+toolbarButtons.appendChild(headingButton);
+toolbarButtons.appendChild(textButton);
+toolbarButtons.appendChild(codeButton);
 
 let main = document.getElementById('main');
 main.appendChild(createInputComponent());
