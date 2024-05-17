@@ -37,7 +37,7 @@ function cloneInputComponent() {
             // Add Label Wrapper
             clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "block");
             // Add Toolbar
-            clonedInputComponent.appendChild(createToolbar());
+            clonedInputComponent.appendChild(createToolbar(true));
             // Adds edit class back to elements
             let addEditElements = clonedInputComponent.querySelectorAll('div, i');
             addEditElements.forEach(element => {

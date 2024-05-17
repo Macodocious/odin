@@ -14,7 +14,7 @@ function createInputContainer() {
     inputContainer.setAttribute("id", "input-container");
     inputContainer.classList.add("input-container");
     inputContainer.appendChild(createInputs());
-    inputContainer.appendChild(createToolbar());
+    inputContainer.appendChild(createToolbar(false));
 
     return inputContainer;
 }
@@ -28,7 +28,7 @@ function createInputs() {
 }
 
 // Create Toolbar
-function createToolbar() {
+function createToolbar(isCloned) {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
     if (!isClone) {
