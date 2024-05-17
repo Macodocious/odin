@@ -1,13 +1,11 @@
 // Global Declarations
-let isClone = false;
 let clonedInputComponent;
 let inputSettings;
+let originalInputComponent = document.querySelectorAll('.input-container#input-container');
 
 function cloneInputComponent() {
     // Clone Input Container
     clonedInputComponent = inputContainer.cloneNode(true);
-    // Add flag for clone
-    isClone = true;
     // Remove ID (#input-container)
     clonedInputComponent.removeAttribute('id');
     // Remove Label Wrapper
@@ -37,7 +35,34 @@ function cloneInputComponent() {
             // Add Label Wrapper
             clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "block");
             // Add Toolbar
-            clonedInputComponent.appendChild(createToolbar(true));
+            let clonedToolbar = document.createElement("div");
+            clonedToolbar.classList.add("toolbar");
+                toolbarButtons = document.createElement("div");
+                toolbarButtons.classList.add("toolbar-buttons");
+                    headingButton = document.createElement("i");
+                    headingButton.classList.add("bi", "bi-type-h1");
+                    headingButton.addEventListener("click", function() {
+                        let headingWrapper = createHeadingComponent();
+                        clonedInputComponent.querySelector(".inputs").appendChild(headingWrapper);  
+                    });
+                    textButton = document.createElement("i");
+                    textButton.classList.add("bi", "bi-type");
+                    textButton.addEventListener("click", function() {
+                        let textWrapper = createTextComponent();
+                        clonedInputComponent.querySelector(".inputs").appendChild(textWrapper); 
+                    });
+                    codeButton = document.createElement("i");
+                    codeButton.classList.add("bi", "bi-code-slash");
+                    codeButton.addEventListener("click", function() {
+                        let codeWrapper = createCodeComponent();
+                        clonedInputComponent.querySelector(".inputs").appendChild(codeWrapper);
+                    });
+                toolbarButtons.appendChild(headingButton);
+                toolbarButtons.appendChild(textButton);
+                toolbarButtons.appendChild(codeButton);
+            clonedToolbar.appendChild(toolbarButtons);
+            clonedToolbar.appendChild(editToolbarButtons);
+            clonedInputComponent.appendChild(clonedToolbar)
             // Adds edit class back to elements
             let addEditElements = clonedInputComponent.querySelectorAll('div, i');
             addEditElements.forEach(element => {
@@ -67,3 +92,4 @@ function cloneInputComponent() {
 
     return clonedInputComponent;          
 }
+

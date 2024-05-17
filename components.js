@@ -8,7 +8,8 @@ let editToolbarButtons;
 // Create button for Headings
 headingButton = document.createElement("i");
 headingButton.classList.add("bi", "bi-type-h1");
-headingButton.addEventListener("click", function() {
+// Create Heading component
+function createHeadingComponent() {
     // Create the wrapper for Heading component
     let headingWrapper = document.createElement("div");
     headingWrapper.classList.add("heading-wrapper", "edit");
@@ -45,19 +46,20 @@ headingButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         headingWrapper.appendChild(deleteHeading);
-    // Appends wrapper for Heading Component to Inputs depending on if component is clone or not
-    if (!isClone) {
-        inputs.appendChild(headingWrapper);
-    } else {
-        clonedInputComponent.querySelector(".inputs").appendChild(headingWrapper);
-    }    
+
+    return headingWrapper;
+}
+headingButton.addEventListener("click", function() {
+    let headingWrapper = createHeadingComponent();
+    inputs.appendChild(headingWrapper); 
 });
 
 // Create button for Text
 textButton = document.createElement("i");
 textButton.classList.add("bi", "bi-type");
-textButton.addEventListener("click", function() {
-    // Create the wrapper for Heading component
+// Create Text component
+function createTextComponent() {
+    // Create the wrapper for Text component
     let textWrapper = document.createElement("div");
     textWrapper.classList.add("text-wrapper", "edit");
         // Create the label for the component
@@ -93,18 +95,19 @@ textButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         textWrapper.appendChild(deleteTextArea);
-    // Appends wrapper for Text Component to Inputs depending on if component is clone or not
-    if (!isClone) {
-        inputs.appendChild(textWrapper);
-    } else {
-        clonedInputComponent.querySelector(".inputs").appendChild(textWrapper);
-    }    
+
+    return textWrapper;
+}
+textButton.addEventListener("click", function() {
+    let textWrapper = createTextComponent();
+    inputs.appendChild(textWrapper); 
 });
 
 // Create button for Code
 codeButton = document.createElement("i");
 codeButton.classList.add("bi", "bi-code-slash");
-codeButton.addEventListener("click", function() {
+// Create Code component
+function createCodeComponent() {
     // Create the wrapper for Code component
     let codeWrapper = document.createElement("div");
     codeWrapper.classList.add("code-wrapper", "edit");
@@ -141,12 +144,12 @@ codeButton.addEventListener("click", function() {
             event.stopPropagation();
         });
         codeWrapper.appendChild(deleteCodeArea);
-    // Appends wrapper for Code Component to Inputs depending on if component is clone or not
-    if (!isClone) {
-        inputs.appendChild(codeWrapper);
-    } else {
-        clonedInputComponent.querySelector(".inputs").appendChild(codeWrapper);
-    }
+
+    return codeWrapper;
+}
+codeButton.addEventListener("click", function() {
+    let codeWrapper = createCodeComponent();
+    inputs.appendChild(codeWrapper);
 });
 
 // Create button for saving

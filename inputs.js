@@ -1,5 +1,7 @@
 // Global Declarations
 let inputContainer;
+let inputs;
+let toolbar;
 let toolbarButtons;
 
 // Create component
@@ -15,7 +17,7 @@ function createInputContainer() {
     inputContainer.setAttribute("id", "input-container");
     inputContainer.classList.add("input-container");
     inputContainer.appendChild(createInputs());
-    inputContainer.appendChild(createToolbar(false));
+    inputContainer.appendChild(createToolbar());
 
     return inputContainer;
 }
@@ -32,14 +34,8 @@ function createInputs() {
 function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-
-    if (!isClone) {
-        toolbar.appendChild(toolbarButtons);
-        toolbar.appendChild(saveButton);
-    } else {
-        toolbar.appendChild(toolbarButtons);
-        toolbar.appendChild(editToolbarButtons);
-    }
+    toolbar.appendChild(toolbarButtons);
+    toolbar.appendChild(saveButton);
 
     return toolbar;
 }
