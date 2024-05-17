@@ -6,22 +6,22 @@ document.addEventListener("DOMContentLoaded", function() {
     // Get the current page URL
     let currentPageURL = new URL(window.location.href);
     let currentPath = currentPageURL.pathname;
-    console.log("Current Page Path:", currentPath);
+
+    if (currentPath === '/odin/') {
+        currentPath = '/odin/index.html';
+    }
 
     // Get all anchor elements with the class "nav-link"
     let navLinks = document.querySelectorAll(".nav-link");
-    console.log("Nav Links Found:", navLinks.length);
 
     // Loop through each anchor element
     navLinks.forEach(function(navLink) {
         // Create a full URL object for the href attribute
         let linkURL = new URL(navLink.href);
         let linkPath = linkURL.pathname;
-        console.log("Nav Link Path:", linkPath);
 
         // Check if the path matches the current page URL path
         if (linkPath === currentPath) {
-            console.log("Match Found:", linkPath);
             // Add the 'active' class to the matching anchor element
             navLink.classList.add("active");
         }
