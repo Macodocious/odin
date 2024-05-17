@@ -29,17 +29,15 @@ function createInputs() {
 }
 
 // Create Toolbar
-function createToolbar(isClone) {
+function createToolbar() {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
-    
-    let clonedToolbarButtons = toolbarButtons.cloneNode(true);
 
     if (!isClone) {
         toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(saveButton);
     } else {
-        toolbar.appendChild(clonedToolbarButtons);
+        toolbar.appendChild(toolbarButtons);
         toolbar.appendChild(editToolbarButtons);
     }
 
