@@ -1,5 +1,6 @@
 // Global Declarations
 let inputContainer;
+let toolbarButtons;
 
 // Create component
 function createInputComponent() {
@@ -32,7 +33,7 @@ function createToolbar(isClone) {
     toolbar = document.createElement("div");
     toolbar.classList.add("toolbar");
     
-    const clonedToolbarButtons = toolbarButtons.cloneNode(true);
+    let clonedToolbarButtons = toolbarButtons.cloneNode(true);
 
     if (!isClone) {
         toolbar.appendChild(toolbarButtons);

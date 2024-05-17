@@ -3,6 +3,7 @@ let headingButton;
 let textButton;
 let codeButton;
 let saveButton;
+let editToolbarButtons;
 
 // Create button for Headings
 headingButton = document.createElement("i");
