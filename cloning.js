@@ -2,7 +2,6 @@
 let isClone = false;
 let clonedInputComponent;
 let inputSettings;
-let clonedToolbar;
 
 function cloneInputComponent() {
     // Clone Input Container
@@ -38,7 +37,7 @@ function cloneInputComponent() {
             // Add Label Wrapper
             clonedInputComponent.querySelectorAll('.label-wrapper:not(.code-wrapper .label-wrapper)').forEach(labelWrapper => labelWrapper.style.display = "block");
             // Add Toolbar
-            clonedToolbar = toolbar.cloneNode(true);
+            clonedInputComponent.appendChild(createToolbar(true));
             // Adds edit class back to elements
             let addEditElements = clonedInputComponent.querySelectorAll('div, i');
             addEditElements.forEach(element => {
