@@ -14,7 +14,7 @@ function createInputContainer() {
     inputContainer.setAttribute("id", "input-container");
     inputContainer.classList.add("input-container");
     inputContainer.appendChild(createInputs());
-    inputContainer.appendChild(createToolbar());
+    inputContainer.appendChild(createToolbar(false));
 
     return inputContainer;
 }
